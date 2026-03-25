@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    icon: '👓',
+    image: '/images/shop.jpg',
+    title: 'Premium Japanese Eyewear',
+    titleEn: 'Authentic Sourcing',
+    description: 'Direct sourcing from Japan with authentic supply assurance and professional product selection support.',
+  },
+  {
+    icon: '🔧',
+    image: '/images/tools.jpg',
+    title: 'Professional Optical Tools',
+    titleEn: 'Made in Japan Tools',
+    description: 'Precision tools and equipment for optical stores and processing centers.',
+  },
+  {
+    icon: '✨',
+    image: '/images/processing.jpg',
+    title: 'Third-party Repair Collaboration',
+    titleEn: 'Factory Coordination',
+    description: 'Collaboration with Japanese repair factories for complex frame repair requirements.',
+  },
+  {
+    icon: '🌏',
+    image: '/images/parts.jpg',
+    title: 'Cross-border Logistics',
+    titleEn: 'APAC Coverage',
+    description: 'Reliable delivery support for Mainland China, Hong Kong, and Southeast Asia.',
+  },
+];
+
+const stats = [
+  { value: '2023.12', label: 'Founded', labelEn: 'Established' },
+  { value: 'ITBEGIN', label: 'Authorized Product', labelEn: 'Agency Window' },
+  { value: 'Funabashi', label: 'Japan Base', labelEn: 'Chiba, Japan' },
+  { value: 'CN/HK/SEA', label: 'Service Regions', labelEn: 'APAC Markets' },
+];
+
+const brands = [
+  'TOPTECH.OPT', 'ITBEGIN', 'Artisan Frames', 'Designer Frames', 'Adjustment Tools', 'Welding Tools', 'Screw Parts', 'Cleaning Consumables'
+];
+---
+
+<BaseLayout
+  title="KeenCulture | Japanese Eyewear Solutions"
+  description="KeenCulture bridges Japanese craftsmanship and overseas markets with one-stop solutions across products, tools, and repair collaboration."
+>
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">JAPAN QUALITY · GLOBAL SERVICE</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          Japanese Eyewear
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+            Solution Partner
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 mb-4 max-w-2xl mx-auto">
+          As a bridge between Japanese craftsmanship and overseas markets, we deliver one-stop solutions from products and tools to after-sales repair support.
+        </p>
+        <p class="text-base text-slate-400 mb-8 max-w-2xl mx-auto">
+          Serving Mainland China · Hong Kong · Southeast Asia with Japan-based supply advantages
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/contact"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105 shadow-lg shadow-amber-400/25"
+          >
+            Business Inquiry
+          </a>
+          <a
+            href="/en/services"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-800 hover:border-slate-500 transition-all"
+          >
+            Explore Services
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-8 bg-slate-100 border-y border-slate-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-slate-500 font-medium">
+        {brands.map((brand) => (
+          <span class="text-sm md:text-base whitespace-nowrap">{brand}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">OUR SERVICES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          Professional Service Portfolio
+        </h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          From product sourcing to after-sales collaboration, we provide one-stop support for optical businesses.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {services.map((service) => (
+          <div class="group bg-slate-50 rounded-2xl overflow-hidden hover:bg-amber-50 transition-all hover:-translate-y-1 border border-slate-100 hover:border-amber-200">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-slate-900 mb-1">{service.title}</h3>
+              <p class="text-sm text-amber-600 mb-3">{service.titleEn}</p>
+              <p class="text-slate-600">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/en/services"
+          class="inline-flex items-center gap-2 text-amber-600 font-medium hover:text-amber-700 transition-colors"
+        >
+          View All Services
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-amber-400 font-medium mb-2">THIRD-PARTY REPAIR COLLABORATION</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+            Repair Collaboration<br/>Technical Coordination
+          </h2>
+          <p class="text-slate-300 mb-6 leading-relaxed">
+            We are coordinating with leading Japanese repair factories (e.g., SUZUKI MEGANE INDUSTRY CO., LTD)
+            to provide overseas partners with practical support for complex frame repair scenarios.
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              Access to Japanese repair factory resources
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              Support for complex technical repair issues
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              Bridge service between overseas partners and Japan
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              Coordination for special after-sales requests
+            </li>
+          </ul>
+          <a
+            href="/en/services#repair"
+            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all"
+          >
+            Learn More
+          </a>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-2xl overflow-hidden">
+            <img
+              src="/images/processing.jpg"
+              alt="Third-party eyewear repair collaboration"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-400/20 rounded-full blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">{stat.value}</div>
+            <div class="text-slate-600">{stat.label}</div>
+            <div class="text-sm text-slate-400">{stat.labelEn}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">GLOBAL REACH</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          Service Coverage
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇨🇳</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">Mainland China</h3>
+          <p class="text-slate-600">Wholesale cooperation with optical stores nationwide</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇭🇰</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">Hong Kong</h3>
+          <p class="text-slate-600">Premium retail optical channel support</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🌏</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">Southeast Asia</h3>
+          <p class="text-slate-600">Expanding in Singapore, Malaysia, and beyond</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+        Start Cooperation
+      </h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        Whether you are a retailer, wholesaler, or looking to expand Japanese tools and repair collaboration channels, we welcome your inquiry.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/en/contact"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105"
+        >
+          Contact Us
+        </a>
+        <a
+          href="mailto:info@keencreative.jp"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-700 transition-all"
+        >
+          info@keencreative.jp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

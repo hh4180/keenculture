@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    id: 'eyewear',
+    icon: '👓',
+    image: '/images/shop.jpg',
+    title: '日本高端眼镜批发',
+    titleEn: 'Premium Japanese Eyewear',
+    description: '依托日本本土产业资源网络，采购高品质职人手造眼镜与知名设计师品牌',
+    features: [
+      '严选材质与工艺，提供高附加值镜架产品',
+      '贴合亚洲人脸型设计，提升佩戴舒适度',
+      '日本直采链路，确保正品与稳定供货',
+      '面向中国大陆、香港及东南亚渠道供给',
+      '提供专业选品建议与组合采购方案',
+    ],
+  },
+  {
+    id: 'tools',
+    icon: '🔧',
+    image: '/images/tools.jpg',
+    title: '专业眼镜工具',
+    titleEn: 'Professional Optical Tools',
+    description: '依托日本精良制造业基础，提供齐全的日本制眼镜工具与设备',
+    features: [
+      '调整工具与专业装配器材',
+      '焊接设备与精密维修工具',
+      '螺丝配件与常用耗材',
+      '清洁护理与维护用品',
+      '支持海外门店与加工中心批量采购',
+    ],
+  },
+  {
+    id: 'repair',
+    icon: '✨',
+    image: '/images/processing.jpg',
+    title: '第三方维修合作',
+    titleEn: 'Third-party Repair Collaboration',
+    description: '联络日本维修工厂资源，为海外商家搭建复杂镜架维修与售后协作渠道',
+    features: [
+      '对接日本著名维修工厂（如 SUZUKI MEGANE INDUSTRY CO., LTD）',
+      '推动复杂镜架维修工艺的跨境协作',
+      '解决海外商家本地难以处理的技术问题',
+      '海外商家与日本工厂桥梁服务',
+      '协助售后方案、流程与沟通协调',
+    ],
+    highlight: true,
+  },
+  {
+    id: 'logistics',
+    icon: '🌏',
+    image: '/images/parts.jpg',
+    title: '跨境物流支持',
+    titleEn: 'Cross-border Logistics',
+    description: '完善的亚太物流网络，保障眼镜与工具安全快速送达',
+    features: [
+      '中国大陆全境配送',
+      '香港本地仓储，当日达',
+      '东南亚主要城市覆盖',
+      '专业包装，保护精密产品',
+      '全程物流追踪',
+    ],
+  },
+];
+
+const repairProcess = [
+  { step: '01', title: '需求评估', description: '提交镜架问题与图片，确认可行的日本工厂协作方案' },
+  { step: '02', title: '流程确认', description: '确认维修路径、时间预估与跨境流程后进入执行' },
+  { step: '03', title: '日本协作', description: '由对接工厂执行维修工艺，我们同步关键进展与结果' },
+  { step: '04', title: '交付回传', description: '维修完成后安排回传并提供后续使用建议' },
+];
+---
+
+<BaseLayout
+  title="服务项目 | KeenCulture"
+  description="KeenCulture 提供日本高品质镜架采购、专业工具供应、第三方维修合作与跨境物流支持。"
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">OUR SERVICES</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          眼镜行业<br/>一站式解决方案
+        </h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          从产品采购到售后修理，从专业工具到物流配送，
+          我们为中国大陆、香港及东南亚客户提供全方位支持与服务。
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-20">
+        {services.map((service, index) => (
+          <div id={service.id} class="scroll-mt-24">
+            <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-4xl">{service.icon}</span>
+                  {service.highlight && (
+                    <span class="px-3 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">
+                      热门服务
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">{service.title}</h2>
+                <p class="text-amber-600 mb-4">{service.titleEn}</p>
+                <p class="text-lg text-slate-600 mb-6">{service.description}</p>
+                <ul class="space-y-3">
+                  {service.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-slate-600">
+                      <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/contact"
+                  class="inline-flex items-center gap-2 mt-8 text-amber-600 font-medium hover:text-amber-700 transition-colors"
+                >
+                  咨询此服务
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              <div class={`relative ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div class={`aspect-[4/3] rounded-2xl overflow-hidden ${
+                  service.highlight 
+                    ? 'ring-2 ring-amber-200' 
+                    : ''
+                }`}>
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-400 font-medium mb-2">REPAIR PROCESS</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+          第三方维修合作流程
+          </h2>
+          <p class="text-slate-400 max-w-2xl mx-auto">
+          四步协作，帮助海外商家高效对接日本维修资源
+          </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {repairProcess.map((item) => (
+          <div class="relative p-6 bg-slate-800 rounded-2xl">
+            <span class="text-5xl font-bold text-amber-400/20">{item.step}</span>
+            <h3 class="text-xl font-semibold text-white mt-2 mb-2">{item.title}</h3>
+            <p class="text-slate-400">{item.description}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div class="mt-12 text-center">
+        <a
+          href="/contact"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all"
+        >
+          立即咨询维修协作
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+          定制化服务
+        </h2>
+        <p class="text-lg text-slate-600 mb-8">
+          每个客户的需求都不尽相同。如果您有特殊的采购需求、品牌代理意向，
+          或需要对接特殊工具需求与跨境维修协作，请随时联系我们详谈。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/contact"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all"
+          >
+            定制服务咨询
+          </a>
+          <a
+            href="mailto:info@keencreative.jp"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-all"
+          >
+            info@keencreative.jp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

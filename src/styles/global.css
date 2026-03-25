@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Inter', 'Noto Sans TC', 'Noto Sans SC', 'Noto Sans JP', 'PingFang TC', 'Microsoft JhengHei', 'PingFang SC', 'Microsoft YaHei', ui-sans-serif, system-ui, sans-serif;
+  --color-amber-50: #ecfeff;
+  --color-amber-100: #cffafe;
+  --color-amber-200: #a5f3fc;
+  --color-amber-300: #67e8f9;
+  --color-amber-400: #22d3ee;
+  --color-amber-500: #06b6d4;
+  --color-amber-600: #0891b2;
+  --color-amber-700: #0e7490;
+
+  --color-orange-500: #0ea5a4;
+}

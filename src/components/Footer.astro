@@ -1,0 +1,174 @@
+---
+const currentYear = new Date().getFullYear();
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'zh-hans';
+
+const withLocale = (path: string, targetLocale: 'zh-hans' | 'zh-hant' | 'en') => {
+  if (targetLocale === 'zh-hans') {
+    return path;
+  }
+  return `${targetLocale === 'en' ? '/en' : '/zh-hant'}${path === '/' ? '' : path}`;
+};
+
+const copyMap = {
+  'zh-hans': {
+    sections: [
+      {
+        title: '公司',
+        links: [
+          { href: '/about', label: '关于我们' },
+          { href: '/services', label: '服务项目' },
+          { href: '/contact', label: '联系我们' },
+        ],
+      },
+      {
+        title: '服务',
+        links: [
+          { href: '/services#eyewear', label: '日本眼镜批发' },
+          { href: '/services#tools', label: '专业眼镜工具' },
+          { href: '/services#repair', label: '第三方维修合作' },
+          { href: '/services#logistics', label: '跨境物流支持' },
+        ],
+      },
+      {
+        title: '联系',
+        links: [
+          { href: 'mailto:info@keencreative.jp', label: 'info@keencreative.jp' },
+          { href: '/contact', label: '微信: KeenCultureJP' },
+        ],
+      },
+    ],
+    tagline1: '连接日本精湛工艺与海外广阔市场的眼镜综合服务商',
+    tagline2: '成立于2023年12月 · ITBEGIN 海外渠道窗口 · 第三方维修合作推进中',
+    rights: 'All rights reserved.',
+    location: '日本千叶县船桥市 | Funabashi, Chiba',
+  },
+  'zh-hant': {
+    sections: [
+      {
+        title: '公司',
+        links: [
+          { href: '/about', label: '關於我們' },
+          { href: '/services', label: '服務項目' },
+          { href: '/contact', label: '聯絡我們' },
+        ],
+      },
+      {
+        title: '服務',
+        links: [
+          { href: '/services#eyewear', label: '日本眼鏡批發' },
+          { href: '/services#tools', label: '專業眼鏡工具' },
+          { href: '/services#repair', label: '第三方維修合作' },
+          { href: '/services#logistics', label: '跨境物流支援' },
+        ],
+      },
+      {
+        title: '聯絡',
+        links: [
+          { href: 'mailto:info@keencreative.jp', label: 'info@keencreative.jp' },
+          { href: '/contact', label: '微信: KeenCultureJP' },
+        ],
+      },
+    ],
+    tagline1: '連接日本精湛工藝與海外廣闊市場的眼鏡綜合服務商',
+    tagline2: '成立於2023年12月 · ITBEGIN 海外渠道窗口 · 第三方維修合作推進中',
+    rights: '版權所有。',
+    location: '日本千葉縣船橋市 | Funabashi, Chiba',
+  },
+  en: {
+    sections: [
+      {
+        title: 'Company',
+        links: [
+          { href: '/about', label: 'About Us' },
+          { href: '/services', label: 'Services' },
+          { href: '/contact', label: 'Contact' },
+        ],
+      },
+      {
+        title: 'Solutions',
+        links: [
+          { href: '/services#eyewear', label: 'Japanese Eyewear Wholesale' },
+          { href: '/services#tools', label: 'Professional Optical Tools' },
+          { href: '/services#repair', label: 'Repair Collaboration' },
+          { href: '/services#logistics', label: 'Cross-border Logistics' },
+        ],
+      },
+      {
+        title: 'Contact',
+        links: [
+          { href: 'mailto:info@keencreative.jp', label: 'info@keencreative.jp' },
+          { href: '/contact', label: 'WeChat: KeenCultureJP' },
+        ],
+      },
+    ],
+    tagline1: 'Integrated eyewear service partner bridging Japanese craftsmanship and overseas markets',
+    tagline2: 'Founded in Dec 2023 · ITBEGIN overseas channel window · Repair collaboration in progress',
+    rights: 'All rights reserved.',
+    location: 'Funabashi, Chiba, Japan',
+  },
+} as const;
+
+const copy = copyMap[locale];
+
+const footerLinks = copy.sections.map((section) => ({
+  ...section,
+  links: section.links.map((link) => ({
+    ...link,
+    href: link.href.startsWith('mailto:') ? link.href : withLocale(link.href, locale),
+  })),
+}));
+---
+
+<footer class="bg-slate-900 text-slate-300">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div class="lg:col-span-1">
+        <a href={withLocale('/', locale)} class="inline-block text-xl font-bold text-white mb-4">
+          <span class="text-amber-400">Keen</span>Culture
+        </a>
+        <p class="text-sm text-slate-400 mb-2">
+          {copy.tagline1}
+        </p>
+        <p class="text-sm text-slate-400 mb-4">
+          {copy.tagline2}
+        </p>
+        <div class="flex gap-4">
+          <a href="mailto:info@keencreative.jp" class="text-slate-400 hover:text-amber-400 transition-colors" aria-label="Email">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+          <a href="#" class="text-slate-400 hover:text-amber-400 transition-colors" aria-label="WeChat">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178A1.17 1.17 0 014.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 01-1.162 1.178 1.17 1.17 0 01-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 01.598.082l1.584.926a.272.272 0 00.139.045c.133 0 .241-.108.241-.243 0-.06-.024-.118-.04-.177l-.325-1.233a.492.492 0 01.177-.554c1.533-1.085 2.495-2.799 2.495-4.695 0-3.303-3.063-6.027-7.054-6.05zm-2.879 3.252a.968.968 0 11.002 1.935.968.968 0 01-.002-1.935zm4.844 0a.968.968 0 11.002 1.935.968.968 0 01-.002-1.935z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      {footerLinks.map((section) => (
+        <div>
+          <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">
+            {section.title}
+          </h3>
+          <ul class="space-y-2">
+            {section.links.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm text-slate-400 hover:text-amber-400 transition-colors">
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+      <p class="text-sm text-slate-400">
+        &copy; {currentYear} キンーカルチャー株式会社. {copy.rights}
+      </p>
+      <p class="text-sm text-slate-500">
+        {copy.location}
+      </p>
+    </div>
+  </div>
+</footer>

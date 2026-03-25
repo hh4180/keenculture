@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const timeline = [
+  { year: '2023.12', title: '公司成立', description: 'キンーカルチャー株式会社於日本千葉縣船橋市成立' },
+  { year: '2024', title: '代理品牌落地', description: '獲得 TOPTECH.OPT Co., LTD 旗下 ITBEGIN 鏡架海外渠道代理權' },
+  { year: '2024', title: '工具採購升級', description: '面向中國大陸、香港及東南亞客戶提供日本本土工具採購與客製需求協調' },
+  { year: '2025', title: '維修協作推進', description: '聯絡日本維修工廠（如 SUZUKI MEGANE INDUSTRY CO., LTD）推進第三方維修合作' },
+];
+
+const values = [
+  {
+    icon: '🎯',
+    title: '工藝優先',
+    description: '嚴選日本材質與工藝，為客戶提供高附加值且貼合亞洲人臉型的鏡架產品',
+  },
+  {
+    icon: '🤝',
+    title: '正品與授權',
+    description: '堅持正品授權與穩定供價，確保合作商家採購可靠、售後可追溯',
+  },
+  {
+    icon: '⚡',
+    title: '一站式協同',
+    description: '覆蓋產品、工具、維修協作與跨境交付，協助商家降低跨境溝通與執行成本',
+  },
+  {
+    icon: '🌐',
+    title: '橋樑價值',
+    description: '連接海外商家與日本工廠，解決本地難以處理的複雜技術問題',
+  },
+];
+---
+
+<BaseLayout
+  title="關於我們 | KeenCulture"
+  description="キンーカルチャー株式会社成立於2023年12月（日本千葉縣船橋市），為中國大陸、香港及東南亞市場提供眼鏡產品、工具與第三方維修協作服務。"
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">ABOUT US</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          連接日本與亞太的<br/>眼鏡產業橋樑
+        </h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          キンーカルチャー株式会社成立於2023年12月，位於日本千葉縣船橋市。
+          我們致力成為亞洲領先的眼鏡綜合服務商，持續連接日本工藝與海外市場需求。
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-amber-600 font-medium mb-2">OUR STORY</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+            從船橋到亞太
+          </h2>
+          <div class="space-y-4 text-slate-600 leading-relaxed">
+            <p>
+              作為連接日本工藝與海外市場的橋樑，我們致力成為亞洲領先的眼鏡綜合服務商。
+              憑藉扎根日本的供應鏈優勢，我們為中國大陸、香港及東南亞客戶提供一站式解決方案。
+            </p>
+            <p>
+              我們擁有深厚的日本本土眼鏡產業資源網絡，專注採購高品質日本職人手造眼鏡與知名設計師品牌。
+              透過嚴格篩選材質與工藝，為客戶提供具備高附加值、符合亞洲人臉型設計的眼鏡產品。
+            </p>
+            <p>
+              除鏡架產品外，我們也為海外門店及加工中心提供日本製眼鏡工具與設備，
+              包括調整工具、焊接設備、螺絲配件及清潔耗材，並推進與日本維修工廠的第三方協作。
+            </p>
+            <p>
+              我們已獲得 TOPTECH.OPT Co., LTD 旗下 ITBEGIN 鏡架產品的海外渠道代理權，
+              同時為合作商家提供其他品牌鏡架的第三方售後服務。
+            </p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center">
+            <div class="text-center p-8">
+              <div class="text-6xl mb-4">🏢</div>
+              <p class="text-xl font-bold text-slate-700">千葉県船橋市</p>
+              <p class="text-slate-500">Funabashi, Chiba</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-amber-400/30 rounded-full blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">OUR VALUES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          核心價值觀
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {values.map((value) => (
+          <div class="p-6 bg-white rounded-2xl border border-slate-100">
+            <div class="text-4xl mb-4">{value.icon}</div>
+            <h3 class="text-xl font-semibold text-slate-900 mb-2">{value.title}</h3>
+            <p class="text-slate-600">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">MILESTONES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          發展歷程
+        </h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="relative">
+          <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-amber-200 md:left-1/2 md:-translate-x-1/2"></div>
+
+          <div class="space-y-12">
+            {timeline.map((item, index) => (
+              <div class={`relative flex items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                <div class="hidden md:block md:w-1/2"></div>
+                <div class="absolute left-4 w-3 h-3 bg-amber-400 rounded-full md:left-1/2 md:-translate-x-1/2 ring-4 ring-amber-100"></div>
+                <div class="ml-12 md:ml-0 md:w-1/2 p-6 bg-slate-50 rounded-xl">
+                  <span class="text-amber-600 font-bold text-lg">{item.year}</span>
+                  <h3 class="text-xl font-semibold text-slate-900 mt-1">{item.title}</h3>
+                  <p class="text-slate-600 mt-2">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+        與我們合作
+      </h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        無論您是眼鏡零售商、批發商，或需要專業工具與維修服務，歡迎聯絡我們洽談合作。
+      </p>
+      <a
+        href="/zh-hant/contact"
+        class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105"
+      >
+        聯絡我們
+      </a>
+    </div>
+  </section>
+</BaseLayout>

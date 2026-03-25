@@ -1,0 +1,176 @@
+---
+const currentPath = Astro.url.pathname;
+const segments = currentPath.split('/').filter(Boolean);
+const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'zh-hans';
+const baseSegments = locale === 'zh-hans' ? segments : segments.slice(1);
+const basePath = `/${baseSegments.join('/')}`.replace(/\/$/, '') || '/';
+
+const withLocale = (path: string, targetLocale: 'zh-hans' | 'zh-hant' | 'en') => {
+  if (targetLocale === 'zh-hans') {
+    return path;
+  }
+  return `${targetLocale === 'en' ? '/en' : '/zh-hant'}${path === '/' ? '' : path}`;
+};
+
+const navLabelMap = {
+  'zh-hans': {
+    home: '首页',
+    about: '关于我们',
+    services: '服务项目',
+    contact: '联系我们',
+    cta: '商务咨询',
+    mobileToggle: '切换菜单',
+  },
+  'zh-hant': {
+    home: '首頁',
+    about: '關於我們',
+    services: '服務項目',
+    contact: '聯絡我們',
+    cta: '商務洽詢',
+    mobileToggle: '切換選單',
+  },
+  en: {
+    home: 'Home',
+    about: 'About',
+    services: 'Services',
+    contact: 'Contact',
+    cta: 'Business Inquiry',
+    mobileToggle: 'Toggle menu',
+  },
+} as const;
+
+const labels = navLabelMap[locale];
+
+const navItems = [
+  { href: withLocale('/', locale), label: labels.home },
+  { href: withLocale('/about', locale), label: labels.about },
+  { href: withLocale('/services', locale), label: labels.services },
+  { href: withLocale('/contact', locale), label: labels.contact },
+];
+
+const languageLinks = [
+  { label: '简', href: withLocale(basePath, 'zh-hans') },
+  { label: '繁', href: withLocale(basePath, 'zh-hant') },
+  { label: 'EN', href: withLocale(basePath, 'en') },
+];
+
+const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100">
+  <nav class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-20">
+      <a href={withLocale('/', locale)} class="flex items-center gap-2 text-xl font-bold text-slate-900 hover:text-amber-600 transition-colors">
+        <span class="text-amber-500">Keen</span>Culture
+      </a>
+
+      <div class="hidden md:flex items-center gap-8">
+      <ul class="flex items-center gap-8">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'text-sm font-medium transition-colors hover:text-amber-600',
+                normalize(currentPath) === normalize(item.href) ? 'text-amber-600' : 'text-slate-600',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="flex items-center gap-2 text-xs text-slate-500">
+        {languageLinks.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'px-2 py-1 rounded transition-colors',
+              normalize(currentPath) === normalize(item.href)
+                ? 'bg-amber-100 text-amber-700'
+                : 'hover:bg-slate-100 hover:text-slate-700',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+      </div>
+
+      <a
+        href={withLocale('/contact', locale)}
+        class="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-colors"
+      >
+        {labels.cta}
+      </a>
+
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-slate-600 hover:text-slate-900"
+        aria-label={labels.mobileToggle}
+        aria-expanded="false"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden pb-4">
+      <ul class="flex flex-col gap-2">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class:list={[
+                'block px-4 py-2 text-sm font-medium rounded-lg transition-colors',
+                normalize(currentPath) === normalize(item.href)
+                  ? 'text-amber-600 bg-amber-50'
+                  : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50',
+              ]}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+        <li class="mt-2">
+          <a
+            href={withLocale('/contact', locale)}
+            class="block px-4 py-2 text-sm font-medium text-center text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-colors"
+          >
+            {labels.cta}
+          </a>
+        </li>
+        <li class="pt-2 px-4">
+          <div class="flex items-center gap-2 text-xs text-slate-500">
+            {languageLinks.map((item) => (
+              <a
+                href={item.href}
+                class:list={[
+                  'px-2 py-1 rounded transition-colors',
+                  normalize(currentPath) === normalize(item.href)
+                    ? 'bg-amber-100 text-amber-700'
+                    : 'hover:bg-slate-100 hover:text-slate-700',
+                ]}
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn?.addEventListener('click', () => {
+    const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+    menuBtn.setAttribute('aria-expanded', String(!isExpanded));
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

@@ -1,0 +1,269 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    icon: '👓',
+    image: '/images/shop.jpg',
+    title: '日本高端眼鏡',
+    titleEn: 'Premium Japanese Eyewear',
+    description: '直接由日本採購高品質品牌眼鏡，為海外客戶提供正品保障與專業選品建議。',
+  },
+  {
+    icon: '🔧',
+    image: '/images/tools.jpg',
+    title: '專業眼鏡工具',
+    titleEn: 'Professional Optical Tools',
+    description: '日本製精密眼鏡維修與加工工具，滿足眼鏡門店與加工中心需求。',
+  },
+  {
+    icon: '✨',
+    image: '/images/processing.jpg',
+    title: '第三方維修合作',
+    titleEn: 'Third-party Repair Collaboration',
+    description: '聯絡日本知名維修工廠，為海外商家對接複雜鏡架維修技術支援。',
+  },
+  {
+    icon: '🌏',
+    image: '/images/parts.jpg',
+    title: '跨境物流支援',
+    titleEn: 'Cross-border Logistics',
+    description: '完善的中國大陸、香港及東南亞物流網絡，確保安全快速送達。',
+  },
+];
+
+const stats = [
+  { value: '2023.12', label: '公司成立時間', labelEn: 'Founded' },
+  { value: 'ITBEGIN', label: '已獲代理品牌', labelEn: 'Authorized Brand' },
+  { value: 'Funabashi', label: '日本據點', labelEn: 'Japan Base' },
+  { value: 'CN/HK/SEA', label: '服務市場', labelEn: 'Service Regions' },
+];
+
+const brands = [
+  'TOPTECH.OPT', 'ITBEGIN', '日本職人手造鏡架', '設計師品牌鏡架', '調整工具', '焊接設備', '螺絲配件', '清潔耗材'
+];
+---
+
+<BaseLayout
+  title="KeenCulture | 日本眼鏡綜合服務商"
+  description="キンーカルチャー株式会社：連接日本工藝與海外市場，提供眼鏡產品、工具採購與第三方維修協作的一站式服務。"
+>
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">JAPAN QUALITY · GLOBAL SERVICE</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          日本眼鏡
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+            專業供應商
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 mb-4 max-w-2xl mx-auto">
+          作為連接日本精湛工藝與海外廣闊市場的橋樑，我們提供從產品、工具到售後維修的一站式解決方案
+        </p>
+        <p class="text-base text-slate-400 mb-8 max-w-2xl mx-auto">
+          服務中國大陸 · 香港 · 東南亞市場，依託日本本土供應鏈持續交付
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/zh-hant/contact"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105 shadow-lg shadow-amber-400/25"
+          >
+            商務洽詢
+          </a>
+          <a
+            href="/zh-hant/services"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-800 hover:border-slate-500 transition-all"
+          >
+            了解服務
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-8 bg-slate-100 border-y border-slate-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-slate-500 font-medium">
+        {brands.map((brand) => (
+          <span class="text-sm md:text-base whitespace-nowrap">{brand}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">OUR SERVICES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          專業服務
+        </h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          從產品採購到售後維修，提供眼鏡產業一站式解決方案
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {services.map((service) => (
+          <div class="group bg-slate-50 rounded-2xl overflow-hidden hover:bg-amber-50 transition-all hover:-translate-y-1 border border-slate-100 hover:border-amber-200">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-slate-900 mb-1">{service.title}</h3>
+              <p class="text-sm text-amber-600 mb-3">{service.titleEn}</p>
+              <p class="text-slate-600">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/zh-hant/services"
+          class="inline-flex items-center gap-2 text-amber-600 font-medium hover:text-amber-700 transition-colors"
+        >
+          查看全部服務
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-amber-400 font-medium mb-2">THIRD-PARTY REPAIR COLLABORATION</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+            第三方維修合作<br/>技術對接服務
+          </h2>
+          <p class="text-slate-300 mb-6 leading-relaxed">
+            我們正在聯絡日本著名眼鏡維修工廠（如 SUZUKI MEGANE INDUSTRY CO., LTD），
+            將日本複雜鏡架維修工藝對接給海外商家，協助更多客戶享受日本專業技術帶來的舒適體驗。
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              對接日本維修工廠資源
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              支援複雜鏡架技術難題
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              海外商家與日本工廠橋樑服務
+            </li>
+            <li class="flex items-center gap-3 text-slate-300">
+              <svg class="w-5 h-5 text-amber-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+              </svg>
+              協調特殊維修與售後需求
+            </li>
+          </ul>
+          <a
+            href="/zh-hant/services#repair"
+            class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all"
+          >
+            了解維修合作
+          </a>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-2xl overflow-hidden">
+            <img
+              src="/images/processing.jpg"
+              alt="第三方眼鏡維修合作"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-400/20 rounded-full blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">{stat.value}</div>
+            <div class="text-slate-600">{stat.label}</div>
+            <div class="text-sm text-slate-400">{stat.labelEn}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">GLOBAL REACH</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
+          服務覆蓋區域
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇨🇳</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">中國大陸</h3>
+          <p class="text-slate-600">全國眼鏡門店批發合作</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇭🇰</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">香港</h3>
+          <p class="text-slate-600">高端眼鏡零售渠道</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🌏</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">東南亞</h3>
+          <p class="text-slate-600">新加坡、馬來西亞等地拓展中</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">
+        開啟合作
+      </h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        無論您是眼鏡零售商、批發商，或希望拓展日本工具與維修協作渠道，歡迎與我們聯絡洽談合作。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/zh-hant/contact"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105"
+        >
+          聯絡我們
+        </a>
+        <a
+          href="mailto:info@keencreative.jp"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-700 transition-all"
+        >
+          info@keencreative.jp
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

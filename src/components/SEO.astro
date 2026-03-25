@@ -1,0 +1,105 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  canonicalURL?: string;
+  type?: 'website' | 'article';
+  keywords?: string;
+  locale?: 'zh-hans' | 'zh-hant' | 'en';
+}
+
+const {
+  title,
+  description,
+  image = '/images/shop.jpg',
+  canonicalURL,
+  type = 'website',
+  keywords,
+  locale = 'zh-hans',
+} = Astro.props;
+
+const localeKeywords = {
+  'zh-hans': '日本眼镜,眼镜批发,眼镜工具,ITBEGIN,TOPTECH.OPT,第三方眼镜维修,千叶县船桥市,香港眼镜,东南亚眼镜',
+  'zh-hant': '日本眼鏡,眼鏡批發,眼鏡工具,ITBEGIN,TOPTECH.OPT,第三方眼鏡維修,千葉縣船橋市,香港眼鏡,東南亞眼鏡',
+  en: 'Japanese eyewear,eyewear wholesale,optical tools,ITBEGIN,TOPTECH.OPT,third-party eyewear repair,Funabashi Chiba,Hong Kong optical,SEA optical',
+} as const;
+
+const localeSiteName = {
+  'zh-hans': 'KeenCulture | 日本眼镜综合服务商',
+  'zh-hant': 'KeenCulture | 日本眼鏡綜合服務商',
+  en: 'KeenCulture | Japanese Eyewear Solutions',
+} as const;
+
+const ogLocaleMap = {
+  'zh-hans': 'zh_CN',
+  'zh-hant': 'zh_TW',
+  en: 'en_US',
+} as const;
+
+const siteName = localeSiteName[locale];
+const fullTitle = title.includes('KeenCulture') ? title : `${title} | KeenCulture`;
+
+const canonicalHref = (() => {
+  const base = Astro.site ?? Astro.url;
+  const href = canonicalURL
+    ? new URL(canonicalURL, base).href
+    : new URL(Astro.url.pathname, base).href;
+
+  const url = new URL(href);
+  url.search = '';
+  url.hash = '';
+  if (url.pathname !== '/' && url.pathname.endsWith('/')) {
+    url.pathname = url.pathname.slice(0, -1);
+  }
+  return url.href;
+})();
+
+const segments = Astro.url.pathname.split('/').filter(Boolean);
+const currentLocalePrefix = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'zh-hans';
+const baseSegments = currentLocalePrefix === 'zh-hans' ? segments : segments.slice(1);
+const basePath = `/${baseSegments.join('/')}`.replace(/\/$/, '') || '/';
+
+const localizePath = (targetLocale: 'zh-hans' | 'zh-hant' | 'en') => {
+  if (targetLocale === 'zh-hans') {
+    return basePath;
+  }
+  return `${targetLocale === 'en' ? '/en' : '/zh-hant'}${basePath === '/' ? '' : basePath}`;
+};
+
+const origin = (Astro.site ?? new URL(canonicalHref)).origin;
+const alternates = [
+  { hreflang: 'zh-Hans', href: new URL(localizePath('zh-hans'), origin).href },
+  { hreflang: 'zh-Hant', href: new URL(localizePath('zh-hant'), origin).href },
+  { hreflang: 'en', href: new URL(localizePath('en'), origin).href },
+];
+
+const resolvedKeywords = keywords ?? localeKeywords[locale];
+---
+
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<meta name="keywords" content={resolvedKeywords} />
+<meta name="author" content="キンーカルチャー株式会社" />
+
+<link rel="canonical" href={canonicalHref} />
+
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalHref} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={new URL(image, Astro.site).href} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={ogLocaleMap[locale]} />
+
+{alternates.map((item) => (
+  <link rel="alternate" hreflang={item.hreflang} href={item.href} />
+))}
+<link rel="alternate" hreflang="x-default" href={alternates[0].href} />
+
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={canonicalHref} />
+<meta property="twitter:title" content={fullTitle} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={new URL(image, Astro.site).href} />

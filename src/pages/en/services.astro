@@ -1,0 +1,214 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    id: 'eyewear',
+    icon: '👓',
+    image: '/images/shop.jpg',
+    title: 'Premium Japanese Eyewear Wholesale',
+    titleEn: 'Premium Japanese Eyewear',
+    description: 'Leveraging Japan-based industry networks to source high-quality artisan-made frames and designer brands.',
+    features: [
+      'Strict material and craftsmanship screening for high value-added products',
+      'Product selection aligned with Asian facial profile design needs',
+      'Direct Japan sourcing for authentic and stable supply',
+      'Distribution support for Mainland China, Hong Kong, and Southeast Asia',
+      'Professional recommendations and assortment planning',
+    ],
+  },
+  {
+    id: 'tools',
+    icon: '🔧',
+    image: '/images/tools.jpg',
+    title: 'Professional Optical Tools',
+    titleEn: 'Professional Optical Tools',
+    description: 'Built on Japan’s manufacturing strengths, we provide a complete range of tools and equipment for optical operations.',
+    features: [
+      'Adjustment tools and professional assembly equipment',
+      'Welding devices and precision repair tools',
+      'Screw parts and daily-use consumables',
+      'Cleaning and maintenance supplies',
+      'Bulk procurement support for stores and processing centers',
+    ],
+  },
+  {
+    id: 'repair',
+    icon: '✨',
+    image: '/images/processing.jpg',
+    title: 'Third-party Repair Collaboration',
+    titleEn: 'Third-party Repair Collaboration',
+    description: 'We coordinate Japanese repair factory resources to support complex frame repair and after-sales collaboration.',
+    features: [
+      'Factory coordination including SUZUKI MEGANE INDUSTRY CO., LTD',
+      'Cross-border collaboration for sophisticated repair craftsmanship',
+      'Support for technical issues difficult to resolve locally',
+      'Bridge services between overseas partners and Japanese factories',
+      'Coordination of after-sales plans, workflows, and communication',
+    ],
+    highlight: true,
+  },
+  {
+    id: 'logistics',
+    icon: '🌏',
+    image: '/images/parts.jpg',
+    title: 'Cross-border Logistics Support',
+    titleEn: 'Cross-border Logistics',
+    description: 'A well-developed APAC logistics network to ensure safe and efficient delivery of eyewear and tools.',
+    features: [
+      'Nationwide delivery across Mainland China',
+      'Local warehousing support in Hong Kong',
+      'Coverage across major Southeast Asian cities',
+      'Protective packaging for precision products',
+      'End-to-end logistics tracking',
+    ],
+  },
+];
+
+const repairProcess = [
+  { step: '01', title: 'Requirement Review', description: 'Submit frame issue details and photos to evaluate feasible collaboration with Japanese factories.' },
+  { step: '02', title: 'Process Confirmation', description: 'Confirm repair route, estimated timeline, and cross-border process before execution.' },
+  { step: '03', title: 'Japan-side Collaboration', description: 'Partner factories execute repair craftsmanship while we synchronize key progress updates.' },
+  { step: '04', title: 'Return Delivery', description: 'After repair completion, we arrange return shipment and provide follow-up usage guidance.' },
+];
+---
+
+<BaseLayout
+  title="Services | KeenCulture"
+  description="KeenCulture provides one-stop solutions across premium eyewear sourcing, professional tools, repair collaboration, and cross-border logistics."
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">OUR SERVICES</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">
+          One-stop Solutions<br/>for Optical Businesses
+        </h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          From product sourcing and after-sales coordination to professional tools and logistics,
+          we provide comprehensive support for clients in Mainland China, Hong Kong, and Southeast Asia.
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-20">
+        {services.map((service, index) => (
+          <div id={service.id} class="scroll-mt-24">
+            <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-4xl">{service.icon}</span>
+                  {service.highlight && (
+                    <span class="px-3 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">
+                      Featured Service
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">{service.title}</h2>
+                <p class="text-amber-600 mb-4">{service.titleEn}</p>
+                <p class="text-lg text-slate-600 mb-6">{service.description}</p>
+                <ul class="space-y-3">
+                  {service.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-slate-600">
+                      <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="/en/contact"
+                  class="inline-flex items-center gap-2 mt-8 text-amber-600 font-medium hover:text-amber-700 transition-colors"
+                >
+                  Inquire About This Service
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              <div class={`relative ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div class={`aspect-[4/3] rounded-2xl overflow-hidden ${
+                  service.highlight
+                    ? 'ring-2 ring-amber-200'
+                    : ''
+                }`}>
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-400 font-medium mb-2">REPAIR PROCESS</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">
+          Third-party Repair Workflow
+          </h2>
+          <p class="text-slate-400 max-w-2xl mx-auto">
+          A four-step process to efficiently connect overseas partners with Japanese repair resources
+          </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {repairProcess.map((item) => (
+          <div class="relative p-6 bg-slate-800 rounded-2xl">
+            <span class="text-5xl font-bold text-amber-400/20">{item.step}</span>
+            <h3 class="text-xl font-semibold text-white mt-2 mb-2">{item.title}</h3>
+            <p class="text-slate-400">{item.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/en/contact"
+          class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all"
+        >
+          Start Repair Consultation
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
+          Customized Support
+        </h2>
+        <p class="text-lg text-slate-600 mb-8">
+          Every partner has different needs. If you have special procurement requirements, agency interests,
+          or need dedicated coordination for tools and cross-border repair collaboration, we are ready to help.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/contact"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all"
+          >
+            Request Custom Support
+          </a>
+          <a
+            href="mailto:info@keencreative.jp"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-all"
+          >
+            info@keencreative.jp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
