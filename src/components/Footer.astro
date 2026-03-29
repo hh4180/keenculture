@@ -40,9 +40,9 @@ const copyMap = {
       },
     ],
     tagline1: '连接日本精湛工艺与海外广阔市场的眼镜综合服务商',
-    tagline2: '成立于2023年12月 · ITBEGIN 海外渠道窗口 · 第三方维修合作推进中',
+    tagline2: '成立于2023年12月 · ITBEGIN 2026年1月正式签约 · 正式业务自2025年起',
     rights: 'All rights reserved.',
-    location: '日本千叶县船桥市 | Funabashi, Chiba',
+    location: '〒273-0039 日本千叶县船桥市印内2丁目3番15号 TOP西船桥第一102号室',
   },
   'zh-hant': {
     sections: [
@@ -72,9 +72,9 @@ const copyMap = {
       },
     ],
     tagline1: '連接日本精湛工藝與海外廣闊市場的眼鏡綜合服務商',
-    tagline2: '成立於2023年12月 · ITBEGIN 海外渠道窗口 · 第三方維修合作推進中',
+    tagline2: '成立於2023年12月 · ITBEGIN 2026年1月正式簽約 · 正式業務自2025年起',
     rights: '版權所有。',
-    location: '日本千葉縣船橋市 | Funabashi, Chiba',
+    location: '〒273-0039 日本千葉縣船橋市印內2丁目3番15號 TOP西船橋第一102號室',
   },
   en: {
     sections: [
@@ -104,9 +104,9 @@ const copyMap = {
       },
     ],
     tagline1: 'Integrated eyewear service partner bridging Japanese craftsmanship and overseas markets',
-    tagline2: 'Founded in Dec 2023 · ITBEGIN overseas channel window · Repair collaboration in progress',
+    tagline2: 'Founded in Dec 2023 · ITBEGIN officially signed in Jan 2026 · Formal operations started in 2025',
     rights: 'All rights reserved.',
-    location: 'Funabashi, Chiba, Japan',
+    location: '2-3-15 Innai, TOP Nishi-Funabashi Dai-1 #102, Funabashi, Chiba 273-0039, Japan',
   },
 } as const;
 
@@ -125,8 +125,12 @@ const footerLinks = copy.sections.map((section) => ({
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
       <div class="lg:col-span-1">
-        <a href={withLocale('/', locale)} class="inline-block text-xl font-bold text-white mb-4">
-          <span class="text-amber-400">Keen</span>Culture
+        <a href={withLocale('/', locale)} class="inline-flex items-center gap-3 text-white mb-4">
+          <img src="/images/KeenCulture.svg" alt="KeenCulture logo" class="h-8 w-auto" />
+          <span class="flex flex-col leading-tight">
+            <span class="text-xl font-bold"><span class="text-amber-400">Keen</span>Culture</span>
+            <span class="text-[11px] font-medium text-slate-400">キンーカルチャー株式会社</span>
+          </span>
         </a>
         <p class="text-sm text-slate-400 mb-2">
           {copy.tagline1}

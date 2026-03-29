@@ -5,7 +5,7 @@ const services = [
   {
     id: 'eyewear',
     icon: '👓',
-    image: '/images/shop.jpg',
+    image: '/images/glass.mp4',
     title: '日本高端眼鏡批發',
     titleEn: 'Premium Japanese Eyewear',
     description: '依託日本本土產業資源網絡，採購高品質職人手造眼鏡與知名設計師品牌',
@@ -20,7 +20,7 @@ const services = [
   {
     id: 'tools',
     icon: '🔧',
-    image: '/images/tools.jpg',
+    image: '/images/san-nishimura-slideshow.mp4',
     title: '專業眼鏡工具',
     titleEn: 'Professional Optical Tools',
     description: '依託日本精良製造業基礎，提供齊全的日本製眼鏡工具與設備',
@@ -35,7 +35,7 @@ const services = [
   {
     id: 'repair',
     icon: '✨',
-    image: '/images/repair.jpg',
+    image: '/images/repair.mp4',
     title: '第三方維修合作',
     titleEn: 'Third-party Repair Collaboration',
     description: '聯絡日本維修工廠資源，為海外商家搭建複雜鏡架維修與售後協作渠道',
@@ -137,11 +137,23 @@ const repairProcess = [
                     ? 'ring-2 ring-amber-200'
                     : ''
                 }`}>
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    class="w-full h-full object-cover"
-                  />
+                  {service.image.endsWith('.mp4') ? (
+                    <video
+                      src={service.image}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      class="w-full h-full object-cover"
+                      aria-label={service.title}
+                    />
+                  ) : (
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      class="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               </div>
             </div>

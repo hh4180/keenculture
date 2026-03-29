@@ -5,7 +5,7 @@ const services = [
   {
     id: 'eyewear',
     icon: '👓',
-    image: '/images/shop.jpg',
+    image: '/images/glass.mp4',
     title: 'Premium Japanese Eyewear Wholesale',
     titleEn: 'Premium Japanese Eyewear',
     description: 'Leveraging Japan-based industry networks to source high-quality artisan-made frames and designer brands.',
@@ -20,7 +20,7 @@ const services = [
   {
     id: 'tools',
     icon: '🔧',
-    image: '/images/tools.jpg',
+    image: '/images/san-nishimura-slideshow.mp4',
     title: 'Professional Optical Tools',
     titleEn: 'Professional Optical Tools',
     description: 'Built on Japan’s manufacturing strengths, we provide a complete range of tools and equipment for optical operations.',
@@ -35,7 +35,7 @@ const services = [
   {
     id: 'repair',
     icon: '✨',
-    image: '/images/repair.jpg',
+    image: '/images/repair.mp4',
     title: 'Third-party Repair Collaboration',
     titleEn: 'Third-party Repair Collaboration',
     description: 'We coordinate Japanese repair factory resources to support complex frame repair and after-sales collaboration.',
@@ -137,11 +137,23 @@ const repairProcess = [
                     ? 'ring-2 ring-amber-200'
                     : ''
                 }`}>
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    class="w-full h-full object-cover"
-                  />
+                  {service.image.endsWith('.mp4') ? (
+                    <video
+                      src={service.image}
+                      autoplay
+                      muted
+                      loop
+                      playsinline
+                      class="w-full h-full object-cover"
+                      aria-label={service.title}
+                    />
+                  ) : (
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      class="w-full h-full object-cover"
+                    />
+                  )}
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 const services = [
   {
     icon: '👓',
-    image: '/images/shop.jpg',
+    image: '/images/glass.png',
     title: 'Premium Japanese Eyewear',
     titleEn: 'Authentic Sourcing',
     description: 'Direct sourcing from Japan with authentic supply assurance and professional product selection support.',
@@ -18,7 +18,7 @@ const services = [
   },
   {
     icon: '✨',
-    image: '/images/repair.jpg',
+    image: '/images/repair.mp4',
     title: 'Third-party Repair Collaboration',
     titleEn: 'Factory Coordination',
     description: 'Collaboration with Japanese repair factories for complex frame repair requirements.',
@@ -34,7 +34,7 @@ const services = [
 
 const stats = [
   { value: '2023.12', label: 'Founded', labelEn: 'Established' },
-  { value: 'ITBEGIN', label: 'Authorized Product', labelEn: 'Agency Window' },
+  { value: 'ITBEGIN (2026.01)', label: 'Official Agency Signing', labelEn: 'TOPTECH.OPT Contracted' },
   { value: 'Funabashi', label: 'Japan Base', labelEn: 'Chiba, Japan' },
   { value: 'CN/HK/SEA', label: 'Service Regions', labelEn: 'APAC Markets' },
 ];
@@ -111,11 +111,23 @@ const brands = [
         {services.map((service) => (
           <div class="group bg-slate-50 rounded-2xl overflow-hidden hover:bg-amber-50 transition-all hover:-translate-y-1 border border-slate-100 hover:border-amber-200">
             <div class="aspect-[4/3] overflow-hidden">
-              <img
-                src={service.image}
-                alt={service.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
+              {service.image.endsWith('.mp4') ? (
+                <video
+                  src={service.image}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  aria-label={service.title}
+                />
+              ) : (
+                <img
+                  src={service.image}
+                  alt={service.title}
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              )}
             </div>
             <div class="p-6">
               <h3 class="text-xl font-semibold text-slate-900 mb-1">{service.title}</h3>
@@ -187,10 +199,14 @@ const brands = [
         </div>
         <div class="relative">
           <div class="aspect-square rounded-2xl overflow-hidden">
-            <img
-              src="/images/repair.jpg" 
-              alt="Third-party eyewear repair collaboration"
+            <video
+              src="/images/repair.mp4"
+              autoplay
+              muted
+              loop
+              playsinline
               class="w-full h-full object-cover"
+              aria-label="Third-party eyewear repair collaboration"
             />
           </div>
           <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-400/20 rounded-full blur-xl"></div>
