@@ -1,6 +1,6 @@
 interface Env {
   RESEND_API_KEY: string;
-  ADMIN_EMAIL: string;
+  ADMIN_EMAIL?: string;
 }
 
 interface ContactFormData {
@@ -13,6 +13,8 @@ interface ContactFormData {
 }
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+  const adminEmail = env.ADMIN_EMAIL || 'Fanhongmintracy@163.com';
+
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -63,7 +65,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       },
       body: JSON.stringify({
         from: 'Keen Creative JP <noreply@keencreative.jp>',
-        to: [env.ADMIN_EMAIL],
+        to: [adminEmail],
         reply_to: data.email,
         subject: `[网站咨询] ${data.type} - ${data.name}`,
         html: generateEmailHtml(data),
