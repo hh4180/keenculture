@@ -1,11 +1,11 @@
 ---
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
-const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'ja';
+const locale = segments[0] === 'en' || segments[0] === 'zh-hant' || segments[0] === 'zh' ? segments[0] : 'ja';
 const baseSegments = locale === 'ja' ? segments : segments.slice(1);
 const basePath = `/${baseSegments.join('/')}`.replace(/\/$/, '') || '/';
 
-const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'en') => {
+const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'zh' | 'en') => {
   if (targetLocale === 'ja') {
     return path;
   }
@@ -14,6 +14,9 @@ const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'en') => {
   }
   if (targetLocale === 'zh-hant') {
     return `/zh-hant${path === '/' ? '' : path}`;
+  }
+  if (targetLocale === 'zh') {
+    return `/zh${path === '/' ? '' : path}`;
   }
   return `/ja${path === '/' ? '' : path}`;
 };
@@ -26,6 +29,14 @@ const navLabelMap = {
     contact: '聯絡我們',
     cta: '商務洽詢',
     mobileToggle: '切換選單',
+  },
+  zh: {
+    home: '首页',
+    about: '关于我们',
+    services: '服务项目',
+    contact: '联络我们',
+    cta: '商务洽询',
+    mobileToggle: '切换选单',
   },
   en: {
     home: 'Home',
@@ -57,6 +68,7 @@ const navItems = [
 const languageLinks = [
   { label: 'JP', fullLabel: '日本語', href: withLocale(basePath, 'ja'), locale: 'ja' },
   { label: '繁', fullLabel: '繁體中文', href: withLocale(basePath, 'zh-hant'), locale: 'zh-hant' },
+  { label: '简', fullLabel: '简体中文', href: withLocale(basePath, 'zh'), locale: 'zh' },
   { label: 'EN', fullLabel: 'English', href: withLocale(basePath, 'en'), locale: 'en' },
 ];
 
@@ -103,7 +115,7 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
           </svg>
-          <span>言語</span>
+          <span>Language</span>
           <span class="text-slate-400">|</span>
           <span>{currentLang.label}</span>
           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">

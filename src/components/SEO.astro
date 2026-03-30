@@ -6,7 +6,7 @@ export interface Props {
   canonicalURL?: string;
   type?: 'website' | 'article';
   keywords?: string;
-  locale?: 'ja' | 'zh-hant' | 'en';
+  locale?: 'ja' | 'zh-hant' | 'en' | 'zh';
 }
 
 const {
@@ -23,18 +23,21 @@ const localeKeywords = {
   'zh-hant': '日本眼鏡,眼鏡批發,眼鏡工具,ITBEGIN,TOPTECH.OPT,第三方眼鏡維修,千葉縣船橋市,香港眼鏡,東南亞眼鏡',
   en: 'Japanese eyewear,eyewear wholesale,optical tools,ITBEGIN,TOPTECH.OPT,third-party eyewear repair,Funabashi Chiba,Hong Kong optical,SEA optical',
   ja: '日本眼鏡,眼鏡卸売,眼鏡工具,ITBEGIN,TOPTECH.OPT,第三者修理連携,船橋,香港,東南アジア',
+  zh: '日本眼镜,眼镜批发,眼镜工具,ITBEGIN,TOPTECH.OPT,第三方眼镜维修,千叶县船桥市,香港眼镜,东南亚眼镜',
 } as const;
 
 const localeSiteName = {
   'zh-hant': 'KeenCulture | 日本眼鏡綜合服務商',
   en: 'KeenCulture | Japanese Eyewear Solutions',
   ja: 'KeenCulture | 日本眼鏡総合サービス',
+  zh: 'KeenCulture | 日本眼镜综合服务商',
 } as const;
 
 const ogLocaleMap = {
   'zh-hant': 'zh_TW',
   en: 'en_US',
   ja: 'ja_JP',
+  zh: 'zh_CN',
 } as const;
 
 const siteName = localeSiteName[locale];
@@ -56,11 +59,11 @@ const canonicalHref = (() => {
 })();
 
 const segments = Astro.url.pathname.split('/').filter(Boolean);
-const currentLocalePrefix = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'ja';
+const currentLocalePrefix = segments[0] === 'en' || segments[0] === 'zh-hant' || segments[0] === 'zh' ? segments[0] : 'ja';
 const baseSegments = currentLocalePrefix === 'ja' ? segments : segments.slice(1);
 const basePath = `/${baseSegments.join('/')}`.replace(/\/$/, '') || '/';
 
-const localizePath = (targetLocale: 'ja' | 'zh-hant' | 'en') => {
+const localizePath = (targetLocale: 'ja' | 'zh-hant' | 'en' | 'zh') => {
   if (targetLocale === 'ja') {
     return basePath;
   }
@@ -70,6 +73,9 @@ const localizePath = (targetLocale: 'ja' | 'zh-hant' | 'en') => {
   if (targetLocale === 'zh-hant') {
     return `/zh-hant${basePath === '/' ? '' : basePath}`;
   }
+  if (targetLocale === 'zh') {
+    return `/zh${basePath === '/' ? '' : basePath}`;
+  }
   return `/ja${basePath === '/' ? '' : basePath}`;
 };
 
@@ -78,6 +84,7 @@ const alternates = [
   { hreflang: 'ja', href: new URL(localizePath('ja'), origin).href },
   { hreflang: 'zh-Hant', href: new URL(localizePath('zh-hant'), origin).href },
   { hreflang: 'en', href: new URL(localizePath('en'), origin).href },
+  { hreflang: 'zh-Hans', href: new URL(localizePath('zh'), origin).href },
 ];
 
 const resolvedKeywords = keywords ?? localeKeywords[locale];
