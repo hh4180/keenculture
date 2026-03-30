@@ -2,9 +2,9 @@
 const currentYear = new Date().getFullYear();
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
-const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'ja';
+const locale = segments[0] === 'en' || segments[0] === 'zh-hant' || segments[0] === 'zh' ? segments[0] : 'ja';
 
-const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'en') => {
+const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'zh' | 'en') => {
   if (targetLocale === 'ja') {
     return path;
   }
@@ -14,10 +14,45 @@ const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'en') => {
   if (targetLocale === 'zh-hant') {
     return `/zh-hant${path === '/' ? '' : path}`;
   }
+  if (targetLocale === 'zh') {
+    return `/zh${path === '/' ? '' : path}`;
+  }
   return `/ja${path === '/' ? '' : path}`;
 };
 
 const copyMap = {
+  zh: {
+    sections: [
+      {
+        title: '公司',
+        links: [
+          { href: '/about', label: '关于我们' },
+          { href: '/services', label: '服务项目' },
+          { href: '/contact', label: '联系我们' },
+        ],
+      },
+      {
+        title: '服务',
+        links: [
+          { href: '/services#eyewear', label: '日本眼镜批发' },
+          { href: '/services#tools', label: '专业眼镜工具' },
+          { href: '/services#repair', label: '第三方维修合作' },
+          { href: '/services#logistics', label: '跨境物流支援' },
+        ],
+      },
+      {
+        title: '联系',
+        links: [
+          { href: 'mailto:Fanhongmintracy@163.com', label: 'Fanhongmintracy@163.com' },
+          { href: '/contact', label: '微信: KeenCultureJP' },
+        ],
+      },
+    ],
+    tagline1: '连接日本精湛工艺与海外广阔市场的眼镜综合服务商',
+    tagline2: '成立于2023年12月 · ITBEGIN 2026年1月正式签约 · 正式业务自2025年起',
+    rights: '版权所有。',
+    location: '〒273-0039 日本国千叶县船桥市印内2丁目3番15号 TOP西船桥第一102号室',
+  },
   'zh-hant': {
     sections: [
       {
