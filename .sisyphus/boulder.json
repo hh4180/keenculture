@@ -1,0 +1,26 @@
+{
+  "active_plan": "/mnt/d/Code/keenculture/.sisyphus/plans/add-simplified-chinese.md",
+  "started_at": "2026-03-30T07:18:43.947Z",
+  "session_ids": [
+    "ses_2c26e745bffe0UohV1p0wWyMPT",
+    "ses_2c26330feffeQ6MLixPVoQ5SEc",
+    "ses_2c262fa82ffelnkTEHawojU9SW",
+    "ses_2c25e4562ffeJALMZP995XMiSi",
+    "ses_2c25e1923ffeeNi5AwvIwg728a",
+    "ses_2c25df535ffeDUDe7mDDDKO6H3",
+    "ses_2c25e6bdfffe8xS6I2AxliebVu"
+  ],
+  "plan_name": "add-simplified-chinese",
+  "agent": "atlas",
+  "task_sessions": {
+    "todo:1": {
+      "task_key": "todo:1",
+      "task_label": "1",
+      "task_title": "更新 Header.astro - 添加简体中文选项",
+      "session_id": "ses_2c25e6bdfffe8xS6I2AxliebVu",
+      "agent": "Sisyphus-Junior",
+      "category": "quick",
+      "updated_at": "2026-03-30T07:27:16.606Z"
+    }
+  }
+}

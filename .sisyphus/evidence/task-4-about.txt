@@ -1,0 +1,4 @@
+✓ File exists: src/pages/zh/about.astro
+✓ No traditional characters detected
+✓ All internal links use /zh/ prefix (1 link verified: /zh/contact)
+✓ Character conversion complete

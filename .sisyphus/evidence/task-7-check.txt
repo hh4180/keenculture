@@ -1,0 +1,13 @@
+
+> keencreativejp@0.0.1 check
+> astro check
+
+15:31:14 [content] Syncing content
+15:31:14 [content] Synced content
+15:31:14 [types] Generated 146ms
+15:31:14 [check] Getting diagnostics for Astro files in /mnt/d/Code/keenculture...
+Result (26 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+

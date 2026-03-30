@@ -1,0 +1,76 @@
+
+> keencreativejp@0.0.1 build
+> astro check && astro build
+
+15:31:14 [content] Syncing content
+15:31:14 [content] Synced content
+15:31:14 [types] Generated 232ms
+15:31:14 [check] Getting diagnostics for Astro files in /mnt/d/Code/keenculture...
+Result (26 files): 
+- 0 errors
+- 0 warnings
+- 0 hints
+
+15:31:48 [content] Syncing content
+15:31:48 [content] Synced content
+15:31:48 [types] Generated 134ms
+15:31:48 [build] output: "static"
+15:31:48 [build] mode: "static"
+15:31:48 [build] directory: /mnt/d/Code/keenculture/dist/
+15:31:48 [build] Collecting build info...
+15:31:48 [build] ✓ Completed in 252ms.
+15:31:49 [build] Building static entrypoints...
+15:31:53 [vite] ✓ built in 4.23s
+15:31:53 [build] ✓ Completed in 4.45s.
+
+ building client (vite) 
+15:31:53 [vite] transforming...
+15:31:53 [vite] ✓ 5 modules transformed.
+15:31:53 [vite] rendering chunks...
+15:31:53 [vite] ✓ built in 95ms
+
+ generating static routes 
+15:31:53 ▶ src/pages/about.astro
+15:31:53   └─ /about/index.html (+14ms) 
+15:31:53 ▶ src/pages/contact.astro
+15:31:53   └─ /contact/index.html (+8ms) 
+15:31:53 ▶ src/pages/en/about.astro
+15:31:53   └─ /en/about/index.html (+13ms) 
+15:31:53 ▶ src/pages/en/contact.astro
+15:31:53   └─ /en/contact/index.html (+7ms) 
+15:31:54 ▶ src/pages/en/services.astro
+15:31:54   └─ /en/services/index.html (+8ms) 
+15:31:54 ▶ src/pages/en/index.astro
+15:31:54   └─ /en/index.html (+7ms) 
+15:31:54 ▶ src/pages/ja/about.astro
+15:31:54   └─ /ja/about/index.html (+13ms) 
+15:31:54 ▶ src/pages/ja/contact.astro
+15:31:54   └─ /ja/contact/index.html (+7ms) 
+15:31:54 ▶ src/pages/ja/services.astro
+15:31:54   └─ /ja/services/index.html (+8ms) 
+15:31:54 ▶ src/pages/ja/index.astro
+15:31:54   └─ /ja/index.html (+11ms) 
+15:31:54 ▶ src/pages/services.astro
+15:31:54   └─ /services/index.html (+6ms) 
+15:31:54 ▶ src/pages/zh/about.astro
+15:31:54   └─ /zh/about/index.html (+12ms) 
+15:31:54 ▶ src/pages/zh/contact.astro
+15:31:54   └─ /zh/contact/index.html (+7ms) 
+15:31:54 ▶ src/pages/zh/services.astro
+15:31:54   └─ /zh/services/index.html (+7ms) 
+15:31:54 ▶ src/pages/zh/index.astro
+15:31:54   └─ /zh/index.html (+8ms) 
+15:31:54 ▶ src/pages/zh-hant/about.astro
+15:31:54   └─ /zh-hant/about/index.html (+12ms) 
+15:31:54 ▶ src/pages/zh-hant/contact.astro
+15:31:54   └─ /zh-hant/contact/index.html (+7ms) 
+15:31:54 ▶ src/pages/zh-hant/services.astro
+15:31:54   └─ /zh-hant/services/index.html (+8ms) 
+15:31:54 ▶ src/pages/zh-hant/index.astro
+15:31:54   └─ /zh-hant/index.html (+7ms) 
+15:31:54 ▶ src/pages/index.astro
+15:31:54   └─ /index.html (+6ms) 
+15:31:54 ✓ Completed in 773ms.
+
+15:31:54 [build] 20 page(s) built in 5.99s
+15:31:54 [build] Complete!
