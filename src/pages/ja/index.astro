@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    icon: '👓',
+    image: '/images/glass.png',
+    title: '高品質な日本製アイウェア',
+    titleEn: 'Premium Japanese Eyewear',
+    description: '日本国内の供給ネットワークを活かし、正規性と安定供給を重視した眼鏡調達を支援します。',
+  },
+  {
+    icon: '🔧',
+    image: '/images/tools.jpg',
+    title: 'プロフェッショナル眼鏡工具',
+    titleEn: 'Professional Optical Tools',
+    description: '店舗・加工現場向けに、調整工具や精密機器を含む実務対応の工具群を提供します。',
+  },
+  {
+    icon: '✨',
+    image: '/images/repair.png',
+    title: '第三者修理連携',
+    titleEn: 'Third-party Repair Collaboration',
+    description: '日本の修理工場との連携により、難易度の高いフレーム修理案件を海外パートナーへ接続します。',
+  },
+  {
+    icon: '🌏',
+    image: '/images/logistics.svg',
+    title: '越境物流サポート',
+    titleEn: 'Cross-border Logistics',
+    description: '中国本土・香港・東南アジア向けに、安全かつ効率的な物流体制を提供します。',
+  },
+];
+
+const stats = [
+  { value: '2023.12', label: '会社設立', labelEn: 'Founded' },
+  { value: 'ITBEGIN (2026.01)', label: '正式代理契約', labelEn: 'Official Agency Signing' },
+  { value: 'Funabashi', label: '日本拠点', labelEn: 'Japan Base' },
+  { value: 'CN/HK/SEA', label: '対応市場', labelEn: 'Service Regions' },
+];
+
+const brands = [
+  'TOPTECH.OPT', 'ITBEGIN', '職人系フレーム', 'デザイナーズフレーム', '調整工具', '溶接設備', 'ネジ部品', 'クリーニング消耗品'
+];
+---
+
+<BaseLayout
+  title="KeenCulture | 日本眼鏡総合サービス"
+  description="KeenCultureは日本のものづくりと海外市場をつなぎ、眼鏡・工具・修理連携をワンストップで提供します。"
+>
+  <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+      <div class="max-w-4xl mx-auto text-center">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">JAPAN QUALITY · GLOBAL SERVICE</p>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          日本眼鏡の
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">
+            ソリューションパートナー
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 mb-4 max-w-2xl mx-auto">
+          日本の職人技と海外市場をつなぐ架け橋として、商品・工具・修理連携まで一体で支援します。
+        </p>
+        <p class="text-base text-slate-400 mb-8 max-w-2xl mx-auto">
+          中国本土・香港・東南アジア向けに、日本拠点の実行力で継続供給を実現
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/ja/contact"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105 shadow-lg shadow-amber-400/25"
+          >
+            お問い合わせ
+          </a>
+          <a
+            href="/ja/services"
+            class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-800 hover:border-slate-500 transition-all"
+          >
+            サービスを見る
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-orange-500/20 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-8 bg-slate-100 border-y border-slate-200">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-center justify-center gap-6 md:gap-12 text-slate-500 font-medium">
+        {brands.map((brand) => (
+          <span class="text-sm md:text-base whitespace-nowrap">{brand}</span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">OUR SERVICES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">主要サービス</h2>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto">
+          商品調達からアフターサポートまで、眼鏡事業に必要な実務をワンストップで提供します。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {services.map((service) => (
+          <div class="group bg-slate-50 rounded-2xl overflow-hidden hover:bg-amber-50 transition-all hover:-translate-y-1 border border-slate-100 hover:border-amber-200">
+            <div class="aspect-[4/3] overflow-hidden">
+              <img
+                src={service.image}
+                alt={service.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-slate-900 mb-1">{service.title}</h3>
+              <p class="text-sm text-amber-600 mb-3">{service.titleEn}</p>
+              <p class="text-slate-600">{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a
+          href="/ja/services"
+          class="inline-flex items-center gap-2 text-amber-600 font-medium hover:text-amber-700 transition-colors"
+        >
+          すべてのサービスを見る
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="text-amber-400 font-medium mb-2">THIRD-PARTY REPAIR COLLABORATION</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">修理連携サポート<br/>技術連携サービス</h2>
+          <p class="text-slate-300 mb-6 leading-relaxed">
+            日本の修理工場と海外事業者をつなぎ、複雑なフレーム修理の実行体制を構築します。
+          </p>
+          <ul class="space-y-3 mb-8">
+            <li class="flex items-center gap-3 text-slate-300">日本修理工場との連携窓口</li>
+            <li class="flex items-center gap-3 text-slate-300">高難度修理の技術調整</li>
+            <li class="flex items-center gap-3 text-slate-300">海外事業者向け進行管理</li>
+            <li class="flex items-center gap-3 text-slate-300">返送・アフター連携の運用</li>
+          </ul>
+          <a href="/ja/services#repair" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all">修理連携の詳細</a>
+        </div>
+        <div class="relative">
+          <div class="aspect-square rounded-2xl overflow-hidden">
+            <img src="/images/repair.png" alt="第三者修理連携" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-400/20 rounded-full blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl sm:text-5xl font-bold text-slate-900 mb-2">{stat.value}</div>
+            <div class="text-slate-600">{stat.label}</div>
+            <div class="text-sm text-slate-400">{stat.labelEn}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">GLOBAL REACH</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">対応エリア</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇨🇳</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">中国本土</h3>
+          <p class="text-slate-600">全国の眼鏡店向け卸売連携</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🇭🇰</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">香港</h3>
+          <p class="text-slate-600">高付加価値市場向けサポート</p>
+        </div>
+        <div class="text-center p-8 rounded-2xl bg-slate-50 border border-slate-100">
+          <div class="text-4xl mb-4">🌏</div>
+          <h3 class="text-xl font-semibold text-slate-900 mb-2">東南アジア</h3>
+          <p class="text-slate-600">シンガポール・マレーシア等へ展開</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">協業をはじめる</h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        小売・卸売・修理連携など、目的に応じた実行可能な協業プランをご提案します。
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/ja/contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105">お問い合わせ</a>
+        <a href="mailto:Fanhongmintracy@163.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white border border-slate-600 rounded-lg hover:bg-slate-700 transition-all">Fanhongmintracy@163.com</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

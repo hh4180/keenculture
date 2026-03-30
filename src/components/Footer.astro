@@ -2,48 +2,22 @@
 const currentYear = new Date().getFullYear();
 const currentPath = Astro.url.pathname;
 const segments = currentPath.split('/').filter(Boolean);
-const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'zh-hans';
+const locale = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'ja';
 
-const withLocale = (path: string, targetLocale: 'zh-hans' | 'zh-hant' | 'en') => {
-  if (targetLocale === 'zh-hans') {
+const withLocale = (path: string, targetLocale: 'ja' | 'zh-hant' | 'en') => {
+  if (targetLocale === 'ja') {
     return path;
   }
-  return `${targetLocale === 'en' ? '/en' : '/zh-hant'}${path === '/' ? '' : path}`;
+  if (targetLocale === 'en') {
+    return `/en${path === '/' ? '' : path}`;
+  }
+  if (targetLocale === 'zh-hant') {
+    return `/zh-hant${path === '/' ? '' : path}`;
+  }
+  return `/ja${path === '/' ? '' : path}`;
 };
 
 const copyMap = {
-  'zh-hans': {
-    sections: [
-      {
-        title: '公司',
-        links: [
-          { href: '/about', label: '关于我们' },
-          { href: '/services', label: '服务项目' },
-          { href: '/contact', label: '联系我们' },
-        ],
-      },
-      {
-        title: '服务',
-        links: [
-          { href: '/services#eyewear', label: '日本眼镜批发' },
-          { href: '/services#tools', label: '专业眼镜工具' },
-          { href: '/services#repair', label: '第三方维修合作' },
-          { href: '/services#logistics', label: '跨境物流支持' },
-        ],
-      },
-      {
-        title: '联系',
-        links: [
-          { href: 'mailto:Fanhongmintracy@163.com', label: 'Fanhongmintracy@163.com' },
-          { href: '/contact', label: '微信: KeenCultureJP' },
-        ],
-      },
-    ],
-    tagline1: '连接日本精湛工艺与海外广阔市场的眼镜综合服务商',
-    tagline2: '成立于2023年12月 · ITBEGIN 2026年1月正式签约 · 正式业务自2025年起',
-    rights: 'All rights reserved.',
-    location: '〒273-0039 日本国千叶县船桥市印内2丁目3番15号 TOP西船桥第一102号室',
-  },
   'zh-hant': {
     sections: [
       {
@@ -107,6 +81,38 @@ const copyMap = {
     tagline2: 'Founded in Dec 2023 · ITBEGIN officially signed in Jan 2026 · Formal operations started in 2025',
     rights: 'All rights reserved.',
     location: '2-3-15 Innai, TOP Nishi-Funabashi Dai-1 #102, Funabashi, Chiba 273-0039, Japan',
+  },
+  ja: {
+    sections: [
+      {
+        title: '会社情報',
+        links: [
+          { href: '/about', label: '会社概要' },
+          { href: '/services', label: 'サービス' },
+          { href: '/contact', label: 'お問い合わせ' },
+        ],
+      },
+      {
+        title: 'サービス',
+        links: [
+          { href: '/services#eyewear', label: '日本製アイウェア卸売' },
+          { href: '/services#tools', label: 'プロ向け眼鏡工具' },
+          { href: '/services#repair', label: '修理連携サポート' },
+          { href: '/services#logistics', label: '越境物流サポート' },
+        ],
+      },
+      {
+        title: '連絡先',
+        links: [
+          { href: 'mailto:Fanhongmintracy@163.com', label: 'Fanhongmintracy@163.com' },
+          { href: '/contact', label: 'WeChat: KeenCultureJP' },
+        ],
+      },
+    ],
+    tagline1: '日本の職人技と海外市場をつなぐ総合アイウェアサービスパートナー',
+    tagline2: '2023年12月設立 · ITBEGIN 2026年1月正式契約 · 2025年より本格稼働',
+    rights: 'All rights reserved.',
+    location: '〒273-0039 千葉県船橋市印内2丁目3-15 TOP西船橋第一102号室',
   },
 } as const;
 

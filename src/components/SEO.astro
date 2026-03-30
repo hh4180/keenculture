@@ -6,7 +6,7 @@ export interface Props {
   canonicalURL?: string;
   type?: 'website' | 'article';
   keywords?: string;
-  locale?: 'zh-hans' | 'zh-hant' | 'en';
+  locale?: 'ja' | 'zh-hant' | 'en';
 }
 
 const {
@@ -16,25 +16,25 @@ const {
   canonicalURL,
   type = 'website',
   keywords,
-  locale = 'zh-hans',
+  locale = 'ja',
 } = Astro.props;
 
 const localeKeywords = {
-  'zh-hans': '日本眼镜,眼镜批发,眼镜工具,ITBEGIN,TOPTECH.OPT,第三方眼镜维修,千叶县船桥市,香港眼镜,东南亚眼镜',
   'zh-hant': '日本眼鏡,眼鏡批發,眼鏡工具,ITBEGIN,TOPTECH.OPT,第三方眼鏡維修,千葉縣船橋市,香港眼鏡,東南亞眼鏡',
   en: 'Japanese eyewear,eyewear wholesale,optical tools,ITBEGIN,TOPTECH.OPT,third-party eyewear repair,Funabashi Chiba,Hong Kong optical,SEA optical',
+  ja: '日本眼鏡,眼鏡卸売,眼鏡工具,ITBEGIN,TOPTECH.OPT,第三者修理連携,船橋,香港,東南アジア',
 } as const;
 
 const localeSiteName = {
-  'zh-hans': 'KeenCulture | 日本眼镜综合服务商',
   'zh-hant': 'KeenCulture | 日本眼鏡綜合服務商',
   en: 'KeenCulture | Japanese Eyewear Solutions',
+  ja: 'KeenCulture | 日本眼鏡総合サービス',
 } as const;
 
 const ogLocaleMap = {
-  'zh-hans': 'zh_CN',
   'zh-hant': 'zh_TW',
   en: 'en_US',
+  ja: 'ja_JP',
 } as const;
 
 const siteName = localeSiteName[locale];
@@ -56,20 +56,26 @@ const canonicalHref = (() => {
 })();
 
 const segments = Astro.url.pathname.split('/').filter(Boolean);
-const currentLocalePrefix = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'zh-hans';
-const baseSegments = currentLocalePrefix === 'zh-hans' ? segments : segments.slice(1);
+const currentLocalePrefix = segments[0] === 'en' || segments[0] === 'zh-hant' ? segments[0] : 'ja';
+const baseSegments = currentLocalePrefix === 'ja' ? segments : segments.slice(1);
 const basePath = `/${baseSegments.join('/')}`.replace(/\/$/, '') || '/';
 
-const localizePath = (targetLocale: 'zh-hans' | 'zh-hant' | 'en') => {
-  if (targetLocale === 'zh-hans') {
+const localizePath = (targetLocale: 'ja' | 'zh-hant' | 'en') => {
+  if (targetLocale === 'ja') {
     return basePath;
   }
-  return `${targetLocale === 'en' ? '/en' : '/zh-hant'}${basePath === '/' ? '' : basePath}`;
+  if (targetLocale === 'en') {
+    return `/en${basePath === '/' ? '' : basePath}`;
+  }
+  if (targetLocale === 'zh-hant') {
+    return `/zh-hant${basePath === '/' ? '' : basePath}`;
+  }
+  return `/ja${basePath === '/' ? '' : basePath}`;
 };
 
 const origin = (Astro.site ?? new URL(canonicalHref)).origin;
 const alternates = [
-  { hreflang: 'zh-Hans', href: new URL(localizePath('zh-hans'), origin).href },
+  { hreflang: 'ja', href: new URL(localizePath('ja'), origin).href },
   { hreflang: 'zh-Hant', href: new URL(localizePath('zh-hant'), origin).href },
   { hreflang: 'en', href: new URL(localizePath('en'), origin).href },
 ];

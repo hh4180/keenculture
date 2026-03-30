@@ -14,13 +14,13 @@ export interface Props {
 const { title, description, image, type } = Astro.props;
 
 const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
-const localePrefix = pathSegments[0] === 'en' || pathSegments[0] === 'zh-hant' ? pathSegments[0] : 'zh-hans';
+const localePrefix = pathSegments[0] === 'en' || pathSegments[0] === 'zh-hant' ? pathSegments[0] : 'ja';
 
 const htmlLang = localePrefix === 'en'
   ? 'en'
   : localePrefix === 'zh-hant'
     ? 'zh-Hant'
-    : 'zh-Hans';
+    : 'ja';
 ---
 
 <!doctype html>

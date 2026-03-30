@@ -1,0 +1,180 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const services = [
+  {
+    id: 'eyewear',
+    icon: '👓',
+    image: '/images/glass.mp4',
+    title: '日本製高品質アイウェア卸売',
+    titleEn: 'Premium Japanese Eyewear',
+    description: '日本国内ネットワークを活用し、高品質フレームとデザイナーズブランドの調達を支援します。',
+    features: [
+      '素材・製造工程を重視した選定基準',
+      'アジア市場向け商品提案',
+      '正規性を重視した安定供給',
+      '中国本土・香港・東南アジア向け展開支援',
+      '品揃え・導入計画の提案',
+    ],
+  },
+  {
+    id: 'tools',
+    icon: '🔧',
+    image: '/images/san-nishimura-slideshow.mp4',
+    title: 'プロフェッショナル眼鏡工具',
+    titleEn: 'Professional Optical Tools',
+    description: '店舗運営・加工現場向けに、実務に必要な工具・機材を一括で提供します。',
+    features: [
+      '調整工具・組立工具',
+      '溶接機器・精密修理工具',
+      'ネジ部品・日常消耗品',
+      'クリーニング・メンテナンス用品',
+      '店舗・加工拠点向け一括調達',
+    ],
+  },
+  {
+    id: 'repair',
+    icon: '✨',
+    image: '/images/repair.mp4',
+    title: '第三者修理連携',
+    titleEn: 'Third-party Repair Collaboration',
+    description: '日本修理工場との連携窓口として、複雑な修理案件の調整と進行管理を行います。',
+    features: [
+      '修理工場との要件確認・窓口対応',
+      '高難度修理案件の技術連携',
+      '現地で対応困難な技術課題の支援',
+      '海外パートナーと日本工場の橋渡し',
+      '納期・工程・返送の統合管理',
+    ],
+    highlight: true,
+  },
+  {
+    id: 'logistics',
+    icon: '🌏',
+    image: '/images/logistics.svg',
+    title: '越境物流サポート',
+    titleEn: 'Cross-border Logistics',
+    description: '精密品輸送に適した物流設計で、安全かつ効率的な納品を実現します。',
+    features: [
+      '中国本土向け配送対応',
+      '香港向け保管・配送連携',
+      '東南アジア主要都市への展開',
+      '精密品向け保護梱包',
+      'エンドツーエンドの追跡管理',
+    ],
+  },
+];
+
+const repairProcess = [
+  { step: '01', title: '要件確認', description: '症状・写真・希望納期を確認し、連携可否を判定します。' },
+  { step: '02', title: '工程設計', description: '修理ルート、見込み期間、越境手順を事前に確定します。' },
+  { step: '03', title: '日本側作業', description: '提携工場で修理を実施し、進捗を共有します。' },
+  { step: '04', title: '返送・フォロー', description: '修理完了後に返送を手配し、運用上の注意点まで案内します。' },
+];
+---
+
+<BaseLayout
+  title="サービス | KeenCulture"
+  description="日本製アイウェア調達、工具供給、修理連携、越境物流まで一体で提供するKeenCultureのサービス紹介。"
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">OUR SERVICES</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">アイウェア事業向け<br/>ワンストップ支援</h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          商品調達・修理連携・工具供給・物流まで、海外市場向け実務を一体でサポートします。
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-20">
+        {services.map((service, index) => (
+          <div id={service.id} class="scroll-mt-24">
+            <div class={`grid lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+              <div class={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-4xl">{service.icon}</span>
+                  {service.highlight && (
+                    <span class="px-3 py-1 text-xs font-medium text-amber-700 bg-amber-100 rounded-full">注力サービス</span>
+                  )}
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 mb-2">{service.title}</h2>
+                <p class="text-amber-600 mb-4">{service.titleEn}</p>
+                <p class="text-lg text-slate-600 mb-6">{service.description}</p>
+                <ul class="space-y-3">
+                  {service.features.map((feature) => (
+                    <li class="flex items-start gap-3 text-slate-600">
+                      <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <a href="/ja/contact" class="inline-flex items-center gap-2 mt-8 text-amber-600 font-medium hover:text-amber-700 transition-colors">
+                  このサービスを相談する
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              </div>
+              <div class={`relative ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div class={`aspect-[4/3] rounded-2xl overflow-hidden ${service.highlight ? 'ring-2 ring-amber-200' : ''}`}>
+                  {service.image.endsWith('.mp4') ? (
+                    <video src={service.image} autoplay muted loop playsinline class="w-full h-full object-cover" aria-label={service.title} />
+                  ) : (
+                    <img src={service.image} alt={service.title} class="w-full h-full object-cover" />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-400 font-medium mb-2">REPAIR PROCESS</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white mb-4">第三者修理の進行フロー</h2>
+        <p class="text-slate-400 max-w-2xl mx-auto">海外パートナーと日本修理工場を効率よく接続する4ステップ運用</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {repairProcess.map((item) => (
+          <div class="relative p-6 bg-slate-800 rounded-2xl">
+            <span class="text-5xl font-bold text-amber-400/20">{item.step}</span>
+            <h3 class="text-xl font-semibold text-white mt-2 mb-2">{item.title}</h3>
+            <p class="text-slate-400">{item.description}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 text-center">
+        <a href="/ja/contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all">修理相談を開始する</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-amber-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">個別要件にも対応</h2>
+        <p class="text-lg text-slate-600 mb-8">
+          調達条件、価格帯、導入スケジュールに応じて、パートナーごとの最適な実行プランを提案します。
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/ja/contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-white bg-slate-900 rounded-lg hover:bg-slate-800 transition-all">カスタム相談を依頼</a>
+          <a href="mailto:Fanhongmintracy@163.com" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-all">Fanhongmintracy@163.com</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

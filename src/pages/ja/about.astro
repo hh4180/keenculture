@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const timeline = [
+  { year: '2023.12', title: '会社設立', description: '千葉県船橋市にてKeenCultureを設立。' },
+  { year: '2024', title: '事業準備フェーズ', description: '日本国内の工房・工具メーカーとの連携協議と海外市場調査を推進。' },
+  { year: '2025', title: '本格運用開始', description: '眼鏡・工具の調達支援および修理連携サービスを正式運用。' },
+  { year: '2026.01', title: '正式代理契約', description: 'TOPTECH.OPT社とITBEGIN海外チャネル代理を正式締結。' },
+];
+
+const values = [
+  {
+    icon: '🎯',
+    title: '職人品質の重視',
+    description: '素材と製造工程を厳格に確認し、付加価値の高い製品提案を行います。',
+  },
+  {
+    icon: '🤝',
+    title: '正規性と信頼性',
+    description: '正規ルートと安定供給を重視し、長期運用可能な調達体制を提供します。',
+  },
+  {
+    icon: '⚡',
+    title: 'ワンストップ連携',
+    description: '商品・工具・修理連携・物流まで、実務の窓口を一元化します。',
+  },
+  {
+    icon: '🌐',
+    title: '橋渡し価値',
+    description: '海外パートナーと日本工場の間で、技術課題と運用課題を同時に解決します。',
+  },
+];
+---
+
+<BaseLayout
+  title="会社情報 | KeenCulture"
+  description="KeenCultureは船橋を拠点に、日本のものづくりと海外市場をつなぐアイウェア総合サービス企業です。"
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">ABOUT US</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">日本とアジア市場をつなぐ<br/>アイウェア事業支援</h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          KeenCultureは2023年12月に千葉県船橋市で設立されました。
+          日本の職人技と海外需要を結び、実務に強い協業モデルを提供しています。
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-amber-600 font-medium mb-2">OUR STORY</p>
+          <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">船橋からアジアへ</h2>
+          <div class="space-y-4 text-slate-600 leading-relaxed">
+            <p>
+              私たちは日本の供給ネットワークを活かし、中国本土・香港・東南アジアの事業者に向けたワンストップ支援を提供しています。
+            </p>
+            <p>
+              高品質なフレーム調達に加え、工具供給・修理連携・物流設計まで含めた運用提案に強みがあります。
+            </p>
+            <p>
+              TOPTECH.OPT社とのITBEGIN代理契約を通じ、海外チャネル向けに継続性の高い協業体制を構築しています。
+            </p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl flex items-center justify-center">
+            <div class="text-center p-8">
+              <div class="text-6xl mb-4">🏢</div>
+              <p class="text-xl font-bold text-slate-700">船橋（千葉）</p>
+              <p class="text-slate-500">Japan</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-amber-400/30 rounded-full blur-xl"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-slate-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">OUR VALUES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">価値観</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {values.map((value) => (
+          <div class="p-6 bg-white rounded-2xl border border-slate-100">
+            <div class="text-4xl mb-4">{value.icon}</div>
+            <h3 class="text-xl font-semibold text-slate-900 mb-2">{value.title}</h3>
+            <p class="text-slate-600">{value.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <p class="text-amber-600 font-medium mb-2">MILESTONES</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">沿革</h2>
+      </div>
+
+      <div class="max-w-3xl mx-auto">
+        <div class="relative">
+          <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-amber-200 md:left-1/2 md:-translate-x-1/2"></div>
+
+          <div class="space-y-12">
+            {timeline.map((item, index) => (
+              <div class={`relative flex items-center gap-8 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                <div class="hidden md:block md:w-1/2"></div>
+                <div class="absolute left-4 w-3 h-3 bg-amber-400 rounded-full md:left-1/2 md:-translate-x-1/2 ring-4 ring-amber-100"></div>
+                <div class="ml-12 md:ml-0 md:w-1/2 p-6 bg-slate-50 rounded-xl">
+                  <span class="text-amber-600 font-bold text-lg">{item.year}</span>
+                  <h3 class="text-xl font-semibold text-slate-900 mt-1">{item.title}</h3>
+                  <p class="text-slate-600 mt-2">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-gradient-to-br from-slate-900 to-slate-800">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl sm:text-4xl font-bold text-white mb-6">協業パートナー募集</h2>
+      <p class="text-lg text-slate-300 mb-8 max-w-2xl mx-auto">
+        小売・卸売・修理連携など、目的に応じた協業計画を一緒に設計します。
+      </p>
+      <a href="/ja/contact" class="inline-flex items-center justify-center px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105">お問い合わせ</a>
+    </div>
+  </section>
+</BaseLayout>

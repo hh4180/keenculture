@@ -1,0 +1,197 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const contactMethods = [
+  {
+    icon: '📧',
+    title: 'メール',
+    value: 'Fanhongmintracy@163.com',
+    href: 'mailto:Fanhongmintracy@163.com',
+    description: '通常24営業時間以内に返信',
+  },
+  {
+    icon: '💬',
+    title: 'WeChat',
+    value: 'KeenCultureJP',
+    href: '#',
+    description: 'WeChatで直接ご連絡ください',
+  },
+  {
+    icon: '📍',
+    title: '所在地',
+    value: '〒273-0039 千葉県船橋市印内2丁目3-15 TOP西船橋第一102号室',
+    href: '#',
+    description: '2023年12月設立',
+  },
+];
+
+const inquiryTypes = [
+  'アイウェア卸売連携',
+  '工具調達について',
+  '第三者修理連携',
+  '物流プラン相談',
+  'ITBEGINチャネル連携',
+  'その他',
+];
+---
+
+<BaseLayout
+  title="お問い合わせ | KeenCulture"
+  description="日本製眼鏡の調達、工具供給、修理連携についてのご相談はこちらから。"
+>
+  <section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-20 lg:py-28">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <p class="text-amber-400 font-medium mb-4 tracking-wide">CONTACT US</p>
+        <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">お問い合わせ</h1>
+        <p class="text-lg text-slate-300 leading-relaxed">
+          小売・卸売・工具調達・修理連携まで幅広くご相談いただけます。
+          日本の実務ネットワークを活かし、具体的な実行提案を行います。
+        </p>
+      </div>
+    </div>
+    <div class="absolute top-1/2 right-0 translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl"></div>
+  </section>
+
+  <section class="py-20 lg:py-28 bg-white">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-3 gap-12">
+        <div class="lg:col-span-2">
+          <h2 class="text-2xl font-bold text-slate-900 mb-8">お問い合わせフォーム</h2>
+
+          <form id="contact-form" class="space-y-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="name" class="block text-sm font-medium text-slate-700 mb-2">お名前 <span class="text-red-500">*</span></label>
+                <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all" placeholder="山田 太郎" />
+              </div>
+              <div>
+                <label for="company" class="block text-sm font-medium text-slate-700 mb-2">会社名 / 店舗名</label>
+                <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all" placeholder="会社名・店舗名" />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-slate-700 mb-2">メールアドレス <span class="text-red-500">*</span></label>
+                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all" placeholder="your@email.com" />
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-slate-700 mb-2">電話番号 / WeChat</label>
+                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all" placeholder="連絡先" />
+              </div>
+            </div>
+
+            <div>
+              <label for="type" class="block text-sm font-medium text-slate-700 mb-2">お問い合わせ種別 <span class="text-red-500">*</span></label>
+              <select id="type" name="type" required class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all bg-white">
+                <option value="">選択してください</option>
+                {inquiryTypes.map((type) => (
+                  <option value={type}>{type}</option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label for="message" class="block text-sm font-medium text-slate-700 mb-2">内容 <span class="text-red-500">*</span></label>
+              <textarea id="message" name="message" required rows={5} class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-amber-400 focus:ring-2 focus:ring-amber-400/20 outline-none transition-all resize-none" placeholder="ご要望・数量・希望時期などをご記入ください"></textarea>
+            </div>
+
+            <button type="submit" id="submit-btn" class="w-full sm:w-auto px-8 py-4 text-base font-medium text-slate-900 bg-amber-400 rounded-lg hover:bg-amber-300 transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100">送信する</button>
+
+            <div id="form-status" class="hidden mt-4 p-4 rounded-lg"></div>
+          </form>
+        </div>
+
+        <div class="lg:col-span-1">
+          <h2 class="text-2xl font-bold text-slate-900 mb-8">連絡先情報</h2>
+
+          <div class="space-y-6">
+            {contactMethods.map((method) => (
+              <div class="p-6 bg-slate-50 rounded-xl">
+                <div class="flex items-start gap-4">
+                  <span class="text-2xl">{method.icon}</span>
+                  <div>
+                    <h3 class="font-semibold text-slate-900">{method.title}</h3>
+                    {method.href.startsWith('mailto:') ? (
+                      <a href={method.href} class="text-amber-600 hover:text-amber-700 transition-colors">{method.value}</a>
+                    ) : (
+                      <p class="text-slate-600">{method.value}</p>
+                    )}
+                    <p class="text-sm text-slate-400 mt-1">{method.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div class="mt-8 p-6 bg-amber-50 rounded-xl border border-amber-100">
+            <h3 class="font-semibold text-slate-900 mb-2">営業時間</h3>
+            <p class="text-slate-600 text-sm">平日 9:00 - 18:00（JST）<br/>土日・日本の祝日は休業</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-slate-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">24h</div>
+          <div class="text-slate-400">営業日内に初回返信</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">CN/JP バイリンガル</div>
+          <div class="text-slate-400">実務連携しやすい体制</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-white mb-2">専門チーム</div>
+          <div class="text-slate-400">眼鏡業界に特化した運用力</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '送信中...';
+      statusDiv.classList.add('hidden');
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          statusDiv.className = 'mt-4 p-4 rounded-lg bg-green-50 text-green-800 border border-green-200';
+          statusDiv.textContent = data.message || '送信が完了しました。';
+          statusDiv.classList.remove('hidden');
+          form.reset();
+        } else {
+          statusDiv.className = 'mt-4 p-4 rounded-lg bg-red-50 text-red-800 border border-red-200';
+          statusDiv.textContent = data.error || '送信に失敗しました。再度お試しください。';
+          statusDiv.classList.remove('hidden');
+        }
+      } catch {
+        statusDiv.className = 'mt-4 p-4 rounded-lg bg-red-50 text-red-800 border border-red-200';
+        statusDiv.textContent = 'ネットワークエラーが発生しました。';
+        statusDiv.classList.remove('hidden');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '送信する';
+      }
+    });
+  </script>
+</BaseLayout>
