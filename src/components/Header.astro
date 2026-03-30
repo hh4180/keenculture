@@ -49,10 +49,12 @@ const navItems = [
 ];
 
 const languageLinks = [
-  { label: '简', href: withLocale(basePath, 'zh-hans') },
-  { label: '繁', href: withLocale(basePath, 'zh-hant') },
-  { label: 'EN', href: withLocale(basePath, 'en') },
+  { label: '简', fullLabel: '简体中文', href: withLocale(basePath, 'zh-hans'), locale: 'zh-hans' },
+  { label: '繁', fullLabel: '繁體中文', href: withLocale(basePath, 'zh-hant'), locale: 'zh-hant' },
+  { label: 'EN', fullLabel: 'English', href: withLocale(basePath, 'en'), locale: 'en' },
 ];
+
+const currentLang = languageLinks.find(l => l.locale === locale) || languageLinks[0];
 
 const normalize = (path: string) => path.replace(/\/$/, '') || '/';
 ---
@@ -63,8 +65,8 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
       <a href={withLocale('/', locale)} class="flex items-center gap-3 text-slate-900 hover:text-amber-600 transition-colors">
         <img src="/images/KeenCulture.svg" alt="KeenCulture logo" class="h-8 w-auto sm:h-9" />
         <span class="flex flex-col leading-tight">
-          <span class="text-[10px] sm:text-xs font-medium text-slate-500">キンーカルチャー株式会社</span>
-          <span class="text-lg sm:text-xl font-bold"><span class="text-amber-500">Keen</span>Culture</span>
+          <span class="text-base sm:text-lg font-bold text-slate-900">キンーカルチャー株式会社</span>
+          <span class="text-[10px] sm:text-xs font-medium text-slate-500"><span class="text-amber-500">Keen</span>Culture</span>
         </span>
       </a>
 
@@ -85,20 +87,41 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
         ))}
       </ul>
 
-      <div class="flex items-center gap-2 text-xs text-slate-500">
-        {languageLinks.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              'px-2 py-1 rounded transition-colors',
-              normalize(currentPath) === normalize(item.href)
-                ? 'bg-amber-100 text-amber-700'
-                : 'hover:bg-slate-100 hover:text-slate-700',
-            ]}
-          >
-            {item.label}
-          </a>
-        ))}
+      <div class="relative" id="lang-dropdown-container">
+        <button
+          id="lang-dropdown-btn"
+          class="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors"
+          aria-expanded="false"
+          aria-haspopup="true"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+          </svg>
+          <span>Language</span>
+          <span class="text-slate-400">|</span>
+          <span>{currentLang.label}</span>
+          <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        <div
+          id="lang-dropdown-menu"
+          class="absolute right-0 mt-1 w-32 bg-white rounded-lg shadow-lg border border-slate-200 py-1 hidden z-50"
+        >
+          {languageLinks.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                'block px-4 py-2 text-sm transition-colors',
+                item.locale === locale
+                  ? 'bg-amber-50 text-amber-700 font-medium'
+                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900',
+              ]}
+            >
+              {item.fullLabel}
+            </a>
+          ))}
+        </div>
       </div>
       </div>
 
@@ -147,18 +170,18 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
           </a>
         </li>
         <li class="pt-2 px-4">
-          <div class="flex items-center gap-2 text-xs text-slate-500">
+          <div class="flex items-center gap-2 text-sm">
             {languageLinks.map((item) => (
               <a
                 href={item.href}
                 class:list={[
-                  'px-2 py-1 rounded transition-colors',
-                  normalize(currentPath) === normalize(item.href)
-                    ? 'bg-amber-100 text-amber-700'
-                    : 'hover:bg-slate-100 hover:text-slate-700',
+                  'px-3 py-1.5 rounded-lg transition-colors',
+                  item.locale === locale
+                    ? 'bg-amber-100 text-amber-700 font-medium'
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
                 ]}
               >
-                {item.label}
+                {item.fullLabel}
               </a>
             ))}
           </div>
@@ -176,5 +199,25 @@ const normalize = (path: string) => path.replace(/\/$/, '') || '/';
     const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
     menuBtn.setAttribute('aria-expanded', String(!isExpanded));
     mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Language dropdown
+  const langBtn = document.getElementById('lang-dropdown-btn');
+  const langMenu = document.getElementById('lang-dropdown-menu');
+  const langContainer = document.getElementById('lang-dropdown-container');
+
+  langBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isExpanded = langBtn.getAttribute('aria-expanded') === 'true';
+    langBtn.setAttribute('aria-expanded', String(!isExpanded));
+    langMenu?.classList.toggle('hidden');
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', (e) => {
+    if (langContainer && !langContainer.contains(e.target as Node)) {
+      langBtn?.setAttribute('aria-expanded', 'false');
+      langMenu?.classList.add('hidden');
+    }
   });
 </script>
