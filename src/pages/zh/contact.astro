@@ -5,15 +5,8 @@ const contactMethods = [
   {
     icon: '📧',
     title: '电子邮件',
-    value: 'zw_shjr@163.com',
-    href: 'mailto:zw_shjr@163.com',
-    description: '工作日24小时内回复',
-  },
-  {
-    icon: '📧',
-    title: '电子邮件',
-    value: 'Fanhongmintracy@163.com',
-    href: 'mailto:Fanhongmintracy@163.com',
+    value: ['zw_shjr@163.com', 'Fanhongmintracy@163.com'],
+    href: '#',
     description: '工作日24小时内回复',
   },
   {
@@ -178,7 +171,15 @@ const inquiryTypes = [
                   <span class="text-2xl">{method.icon}</span>
                   <div>
                     <h3 class="font-semibold text-slate-900">{method.title}</h3>
-                    {method.href.startsWith('mailto:') ? (
+                    {Array.isArray(method.value) ? (
+                      <div class="space-y-1">
+                        {method.value.map((email) => (
+                          <a href={`mailto:${email}`} class="block text-amber-600 hover:text-amber-700 transition-colors">
+                            {email}
+                          </a>
+                        ))}
+                      </div>
+                    ) : method.href.startsWith('mailto:') ? (
                       <a href={method.href} class="text-amber-600 hover:text-amber-700 transition-colors">
                         {method.value}
                       </a>
