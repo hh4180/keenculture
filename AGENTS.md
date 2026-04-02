@@ -1,19 +1,24 @@
 # AGENTS.md - Keen Creative JP
 
-Guidance for coding agents working in this repository.
+Practical guide for agentic coding assistants working in this repository.
 
-## Project Snapshot
-- Astro 5 static site
-- Tailwind CSS v4 via `@tailwindcss/vite`
-- TypeScript strict mode
-- Cloudflare Pages deployment target
-- Main content is mostly Simplified Chinese with some English/Japanese labels
+## 1) Project Snapshot
+- Framework: Astro 5 (`astro`)
+- Styling: Tailwind CSS v4 via `@tailwindcss/vite`
+- Language: TypeScript strict mode
+- Deployment target: Cloudflare Pages (static output)
+- Content profile: Japanese + Traditional Chinese + Simplified Chinese + English
 
-## Source of Truth
-Prefer observed repository patterns over generic Astro advice.
-Most important files: `package.json`, `astro.config.mjs`, `tsconfig.json`, `src/layouts/BaseLayout.astro`, `src/components/*.astro`, `src/pages/*.astro`, and `src/styles/global.css`.
+Primary files to inspect first:
+- `package.json`
+- `astro.config.mjs`
+- `tsconfig.json`
+- `src/layouts/BaseLayout.astro`
+- `src/components/*.astro`
+- `src/pages/**/*.astro`
+- `src/styles/global.css`
 
-## Repository Structure
+## 2) Repository Structure (Observed)
 ```text
 src/
   components/
@@ -23,140 +28,165 @@ src/
   layouts/
     BaseLayout.astro
   pages/
-    about.astro
-    contact.astro
     index.astro
+    about.astro
     services.astro
+    contact.astro
+    ja/*.astro
+    en/*.astro
+    zh/*.astro
+    zh-hant/*.astro
   styles/
     global.css
 public/
   images/
 ```
 
-## Commands
-Run commands from the repo root.
+## 3) Build / Lint / Test Commands
+Run all commands from repo root.
 
 ```bash
-# Development server
+# Development
 npm run dev
 
-# Type/lint check
+# Project diagnostics / type checks
 npm run check
 npm run lint
 
-# Production build
+# Production build (includes check)
 npm run build
 
-# Preview production build
+# Local preview
 npm run preview
 
-# Single-file check
+# Astro CLI passthrough
+npm run astro -- --help
+
+# Single-file Astro check
 npx astro check src/pages/contact.astro
 ```
 
-Notes:
-- `build` runs `astro check && astro build`
-- `lint` is not ESLint here; it is the same as `astro check`
-- There is no dedicated test runner configured right now
+### Command facts (verified from `package.json`)
+- `check` = `astro check`
+- `lint` = `astro check` (not ESLint)
+- `build` = `astro check && astro build`
 
-## Tests
-What was found:
-- No `vitest`, `jest`, `playwright`, or similar config at repo root
-- No repo test files outside `node_modules`
-- No valid “single test” command exists today
+## 4) Testing Reality (Important)
+There is currently **no dedicated test runner** configured.
 
-If a change needs verification, use:
-- `npm run check`
-- `npm run build`
-- targeted manual review of the affected page/component
+What was verified:
+- No `test` script in `package.json`
+- No Vitest/Jest/Playwright/Cypress/Mocha/Ava config in repo
+- No valid “single test” command today
 
-## Editor Rule Files
-Checked and not found:
+So verification currently means:
+1. `npm run check`
+2. `npm run build`
+3. manual behavior review for affected pages/components
+
+Do not claim tests passed if no tests were run.
+
+## 5) Cursor / Copilot Rule Files
+Checked and **not found**:
 - `.cursorrules`
 - `.cursor/rules/**`
 - `.github/copilot-instructions.md`
 
-Do not claim those files exist unless they are added later.
+Do not invent guidance from those files unless they are added later.
 
-## Architecture Patterns
-### Layout pattern
-Every page should use `BaseLayout`.
-`BaseLayout.astro` already imports global styles, SEO, header, and footer.
+## 6) Architecture & Composition Conventions
 
-### Component structure
-Typical `.astro` files follow this order: frontmatter, relative imports, `export interface Props` when needed, `Astro.props` destructuring, local arrays/objects for repeated content, Tailwind-heavy markup, and a small inline `<script>` only when necessary.
+### Layout-first page architecture
+- Use `BaseLayout` for page structure.
+- `BaseLayout` handles global CSS, SEO component, header, footer, and `<slot />`.
+
+### Page localization structure
+- Root pages often re-export default Japanese pages (e.g. `src/pages/index.astro` imports `./ja/index.astro`).
+- Locale folders are route-based (`/en`, `/zh`, `/zh-hant`, default `/` for Japanese).
 
 ### Data-in-frontmatter pattern
-Small static collections live directly in the page/component frontmatter.
+- Keep small static collections in frontmatter (`const` arrays/maps), not separate data modules.
+- Examples: nav labels and footer copy maps.
 
-Examples:
-- navigation items in `src/components/Header.astro`
-- footer sections in `src/components/Footer.astro`
-- services, brands, stats, timelines in page files
+## 7) Imports, Formatting, and File Style
 
-Prefer that over creating separate data modules for tiny static lists.
+### Imports
+- Use **relative imports** (current repository norm).
+- Do not introduce alias imports ad hoc.
 
-## Imports
-Use relative imports. That is the current codebase convention.
-Do not switch to path aliases unless the whole repo is intentionally updated.
+### Formatting style (observed)
+- 2-space indentation.
+- Single quotes in frontmatter JS/TS.
+- Double quotes in HTML attributes.
+- Semicolons are commonly present in frontmatter.
 
-## TypeScript and Astro Conventions
-- Strict mode is enabled via `astro/tsconfigs/strict`
-- Use `export interface Props` for component/layout props
-- Destructure `Astro.props` near the top of the file
-- Use literal unions where helpful, e.g. `type?: 'website' | 'article'`
-- Avoid `any`, `@ts-ignore`, and broad type assertions
+### File naming
+- Components/layouts: PascalCase (`Header.astro`, `BaseLayout.astro`)
+- Pages/routes: lowercase (`about.astro`, `services.astro`)
+- Variables/props/functions: camelCase
 
-## Naming Conventions
-- Components/layouts: PascalCase file names
-- Pages: lowercase route names like `about.astro` and `services.astro`
-- Variables and props: camelCase
-- Repeated collections: plural names like `services`, `brands`, `footerLinks`
+## 8) TypeScript / Astro Conventions
+- Strict config extends `astro/tsconfigs/strict`.
+- Prefer `export interface Props` for typed component/layout props.
+- Destructure `Astro.props` near top of frontmatter.
+- Use literal unions where meaningful (e.g. locales, SEO type).
+- Use `as const` for static lookup maps.
+- Avoid `any`, `@ts-ignore`, and broad unsafe assertions.
 
-## Styling Guidelines
-- Use Tailwind utility classes in markup
-- Keep global CSS minimal
-- Tailwind is loaded from `src/styles/global.css` via `@import "tailwindcss"`
-- Theme customization currently lives in `@theme` custom properties
-- Reuse the existing slate/amber palette and spacing rhythm
-- Common patterns already in use include `container mx-auto px-4 sm:px-6 lg:px-8`, `rounded-xl` / `rounded-2xl`, `bg-slate-*`, `text-slate-*`, `text-amber-*`, and mobile-first responsive classes
-Avoid custom CSS when Tailwind utilities are enough.
+## 9) Styling Guidelines
+- Tailwind utilities are the primary styling method.
+- Keep `global.css` minimal; use it mainly for theme tokens.
+- Tailwind is loaded in `src/styles/global.css` via `@import "tailwindcss"`.
+- Reuse established palette/spacing patterns across pages.
+- Prefer utility classes over custom CSS blocks.
 
-## Markup, Scripts, and Error Handling
-- Use semantic sections and headings
-- Keep SEO metadata flowing through `BaseLayout`
-- Preserve the existing multilingual marketing tone
-- Use descriptive `alt` text for images
-- Keep CTA copy concise and business-oriented
-- Keep client-side scripts minimal and local to the component
-- Prefer null-safe DOM access in inline scripts
-- Do not silently swallow meaningful failures in new code
+Common utility patterns in this repo include:
+- `container mx-auto px-4 sm:px-6 lg:px-8`
+- `rounded-lg`, `rounded-xl`, `rounded-2xl`
+- `bg-slate-*`, `text-slate-*`, `text-amber-*`
+- mobile-first responsive classes (`sm:`, `md:`, `lg:`)
 
-## Verification Expectations
-After changes, run:
+## 10) Markup, Scripts, and Error Handling
+- Use semantic structure (`header`, `nav`, `main`, `footer`, section headings).
+- Keep multilingual marketing tone consistent with existing copy.
+- Use descriptive image `alt` text.
+- Keep inline scripts minimal and component-local.
+- Prefer null-safe DOM access (`?.`) in client-side scripts.
+- Favor safe defaults and path normalization in URL/locale logic.
+- Do not silently swallow meaningful failures.
+
+## 11) SEO / URL Conventions
+- Keep SEO metadata centralized through `SEO.astro` via `BaseLayout`.
+- Keep canonical URL generation normalized (strip search/hash, trim trailing slash).
+- Maintain alternate `hreflang` links for localized routes.
+
+## 12) Verification Workflow for Agents
+After any change, run:
 
 ```bash
 npm run check
 npm run build
 ```
 
-If touching one `.astro` file heavily, also run:
+If one `.astro` file was heavily edited, also run:
 
 ```bash
 npx astro check path/to/file.astro
 ```
 
-## Do Not
-- Do not invent commands that are not in `package.json`
-- Do not describe a nonexistent test suite as if it exists
-- Do not replace relative imports with aliases ad hoc
-- Do not add React/Vue/Svelte for small interactions
-- Do not add large custom CSS blocks when Tailwind is enough
-- Do not commit `dist/` or `node_modules/`
+## 13) Do / Don’t Checklist
 
-## Do
+### Do
 - Reuse `BaseLayout`, `SEO`, `Header`, and `Footer`
-- Match the existing Tailwind-heavy style
-- Keep small static content close to the page/component
-- Verify with `npm run check` and `npm run build`
-- Update this file if commands, tooling, or rule files change
+- Follow existing Tailwind-heavy composition
+- Keep small static data close to pages/components
+- Keep localization logic consistent with existing route-prefix helpers
+- Update this document when tooling/commands/conventions change
+
+### Don’t
+- Don’t invent commands not present in `package.json`
+- Don’t claim `npm test` or single-test workflows exist
+- Don’t present `astro check` as runtime behavior testing
+- Don’t switch to alias imports without an explicit repo-wide migration
+- Don’t add heavy custom CSS when utilities are sufficient
+- Don’t commit generated or dependency directories (`dist/`, `node_modules/`)
