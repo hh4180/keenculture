@@ -110,7 +110,12 @@ const repairProcess = [
                 </div>
                 <h2 class="text-3xl font-bold text-slate-900 mb-2">{service.title}</h2>
                 <p class="text-amber-600 mb-4">{service.titleEn}</p>
-                <p class="text-lg text-slate-600 mb-6">{service.description}</p>
+                <p class={`text-lg text-slate-600 ${service.id === 'eyewear' ? 'mb-3' : 'mb-6'}`}>{service.description}</p>
+                {service.id === 'eyewear' && (
+                  <p class="text-sm text-amber-700 mb-6">
+                    Authorized China agent for TOPTECH.OPT Co.,LTD "ITBEGIN" frames.
+                  </p>
+                )}
                 <ul class="space-y-3">
                   {service.features.map((feature) => (
                     <li class="flex items-start gap-3 text-slate-600">

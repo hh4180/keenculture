@@ -13,7 +13,10 @@ interface ContactFormData {
 }
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
-  const adminEmail = env.ADMIN_EMAIL || 'Fanhongmintracy@163.com';
+  const adminEmails = (env.ADMIN_EMAIL || 'zw_shjr@163.com,Fanhongmintracy@163.com')
+    .split(',')
+    .map((email) => email.trim())
+    .filter(Boolean);
 
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -65,7 +68,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
       },
       body: JSON.stringify({
         from: 'Keen Creative JP <noreply@keencreative.jp>',
-        to: [adminEmail],
+        to: adminEmails,
         reply_to: data.email,
         subject: `[网站咨询] ${data.type} - ${data.name}`,
         html: generateEmailHtml(data),
