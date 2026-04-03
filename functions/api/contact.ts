@@ -19,7 +19,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     .split(',')
     .map((email) => email.trim())
     .filter(Boolean);
-  const fromEmail = env.RESEND_FROM_EMAIL || 'noreply@keencreative.jp';
+  const fromEmail = env.RESEND_FROM_EMAIL || 'noreply@keen-culture.com';
   const fromName = env.RESEND_FROM_NAME || 'Keen Creative JP';
 
   const corsHeaders = {
