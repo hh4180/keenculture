@@ -1,6 +1,8 @@
-interface Env {
+﻿interface Env {
   RESEND_API_KEY: string;
   ADMIN_EMAIL?: string;
+  RESEND_FROM_EMAIL?: string;
+  RESEND_FROM_NAME?: string;
 }
 
 interface ContactFormData {
@@ -17,6 +19,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     .split(',')
     .map((email) => email.trim())
     .filter(Boolean);
+  const fromEmail = env.RESEND_FROM_EMAIL || 'noreply@keencreative.jp';
+  const fromName = env.RESEND_FROM_NAME || 'Keen Creative JP';
 
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
@@ -25,6 +29,16 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   };
 
   try {
+    if (!env.RESEND_API_KEY) {
+      return new Response(
+        JSON.stringify({ success: false, error: 'RESEND_API_KEY 鏈厤缃? }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json', ...corsHeaders }
+        }
+      );
+    }
+
     const formData = await request.formData();
     
     const data: ContactFormData = {
@@ -39,7 +53,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     // Validate required fields
     if (!data.name || !data.email || !data.type || !data.message) {
       return new Response(
-        JSON.stringify({ success: false, error: '请填写所有必填字段' }),
+        JSON.stringify({ success: false, error: '璇峰～鍐欐墍鏈夊繀濉瓧娈? }),
         { 
           status: 400,
           headers: { 'Content-Type': 'application/json', ...corsHeaders }
@@ -51,7 +65,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
       return new Response(
-        JSON.stringify({ success: false, error: '请输入有效的邮箱地址' }),
+        JSON.stringify({ success: false, error: '璇疯緭鍏ユ湁鏁堢殑閭鍦板潃' }),
         { 
           status: 400,
           headers: { 'Content-Type': 'application/json', ...corsHeaders }
@@ -67,10 +81,10 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        from: 'Keen Creative JP <noreply@keencreative.jp>',
+        from: `${fromName} <${fromEmail}>`,
         to: adminEmails,
         reply_to: data.email,
-        subject: `[网站咨询] ${data.type} - ${data.name}`,
+        subject: `[缃戠珯鍜ㄨ] ${data.type} - ${data.name}`,
         html: generateEmailHtml(data),
         text: generateEmailText(data),
       }),
@@ -78,9 +92,13 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
 
     if (!emailResponse.ok) {
       const errorData = await emailResponse.text();
-      console.error('Resend API error:', errorData);
+      const errorMessage = getResendErrorMessage(emailResponse.status, errorData);
+      console.error('Resend API error:', {
+        status: emailResponse.status,
+        body: errorData,
+      });
       return new Response(
-        JSON.stringify({ success: false, error: '邮件发送失败，请稍后重试' }),
+        JSON.stringify({ success: false, error: errorMessage }),
         { 
           status: 500,
           headers: { 'Content-Type': 'application/json', ...corsHeaders }
@@ -89,7 +107,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     }
 
     return new Response(
-      JSON.stringify({ success: true, message: '咨询已提交，我们将尽快与您联系' }),
+      JSON.stringify({ success: true, message: '鍜ㄨ宸叉彁浜わ紝鎴戜滑灏嗗敖蹇笌鎮ㄨ仈绯? }),
       { 
         status: 200,
         headers: { 'Content-Type': 'application/json', ...corsHeaders }
@@ -99,7 +117,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   } catch (error) {
     console.error('Form submission error:', error);
     return new Response(
-      JSON.stringify({ success: false, error: '服务器错误，请稍后重试' }),
+      JSON.stringify({ success: false, error: '鏈嶅姟鍣ㄩ敊璇紝璇风◢鍚庨噸璇? }),
       { 
         status: 500,
         headers: { 'Content-Type': 'application/json', ...corsHeaders }
@@ -143,41 +161,41 @@ function generateEmailHtml(data: ContactFormData): string {
 <body>
   <div class="container">
     <div class="header">
-      <h1>新的网站咨询</h1>
-      <p>来自 Keen Creative JP 官网</p>
+      <h1>鏂扮殑缃戠珯鍜ㄨ</h1>
+      <p>鏉ヨ嚜 Keen Creative JP 瀹樼綉</p>
     </div>
     <div class="content">
       <div class="field">
-        <div class="label">咨询类型</div>
+        <div class="label">鍜ㄨ绫诲瀷</div>
         <div class="value"><span class="badge">${escapeHtml(data.type)}</span></div>
       </div>
       <div class="field">
-        <div class="label">姓名</div>
+        <div class="label">濮撳悕</div>
         <div class="value">${escapeHtml(data.name)}</div>
       </div>
       ${data.company ? `
       <div class="field">
-        <div class="label">公司</div>
+        <div class="label">鍏徃</div>
         <div class="value">${escapeHtml(data.company)}</div>
       </div>
       ` : ''}
       <div class="field">
-        <div class="label">邮箱</div>
+        <div class="label">閭</div>
         <div class="value"><a href="mailto:${escapeHtml(data.email)}">${escapeHtml(data.email)}</a></div>
       </div>
       ${data.phone ? `
       <div class="field">
-        <div class="label">电话/微信</div>
+        <div class="label">鐢佃瘽/寰俊</div>
         <div class="value">${escapeHtml(data.phone)}</div>
       </div>
       ` : ''}
       <div class="field">
-        <div class="label">咨询内容</div>
+        <div class="label">鍜ㄨ鍐呭</div>
         <div class="message-box">${escapeHtml(data.message).replace(/\n/g, '<br>')}</div>
       </div>
     </div>
     <div class="footer">
-      此邮件由网站表单自动发送，请直接回复此邮件联系客户。
+      姝ら偖浠剁敱缃戠珯琛ㄥ崟鑷姩鍙戦€侊紝璇风洿鎺ュ洖澶嶆閭欢鑱旂郴瀹㈡埛銆?
     </div>
   </div>
 </body>
@@ -187,18 +205,18 @@ function generateEmailHtml(data: ContactFormData): string {
 
 function generateEmailText(data: ContactFormData): string {
   return `
-新的网站咨询
+鏂扮殑缃戠珯鍜ㄨ
 ================
 
-咨询类型: ${data.type}
-姓名: ${data.name}
-${data.company ? `公司: ${data.company}\n` : ''}邮箱: ${data.email}
-${data.phone ? `电话/微信: ${data.phone}\n` : ''}
-咨询内容:
+鍜ㄨ绫诲瀷: ${data.type}
+濮撳悕: ${data.name}
+${data.company ? `鍏徃: ${data.company}\n` : ''}閭: ${data.email}
+${data.phone ? `鐢佃瘽/寰俊: ${data.phone}\n` : ''}
+鍜ㄨ鍐呭:
 ${data.message}
 
 ---
-此邮件由 Keen Creative JP 官网表单自动发送
+姝ら偖浠剁敱 Keen Creative JP 瀹樼綉琛ㄥ崟鑷姩鍙戦€?
   `.trim();
 }
 
@@ -209,4 +227,33 @@ function escapeHtml(str: string): string {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
+}
+
+function getResendErrorMessage(status: number, rawBody: string): string {
+  const body = rawBody.toLowerCase();
+
+  if (status === 401 || body.includes('api key') || body.includes('unauthorized')) {
+    return '邮件发送失败：RESEND_API_KEY 无效或未配置';
+  }
+
+  if (
+    (body.includes('domain') && body.includes('verify')) ||
+    (body.includes('from address') && body.includes('verify'))
+  ) {
+    return '邮件发送失败：发件域名未验证，请先在 Resend 完成域名验证';
+  }
+
+  if (body.includes('testing emails') || body.includes('test mode')) {
+    return '邮件发送失败：当前为 Resend 测试模式，仅可发送到账号所有者邮箱';
+  }
+
+  if (body.includes('invalid') && body.includes('from')) {
+    return '邮件发送失败：发件邮箱格式或配置不正确';
+  }
+
+  if (status === 429 || body.includes('rate limit')) {
+    return '邮件发送失败：请求过于频繁，请稍后重试';
+  }
+
+  return '邮件发送失败，请稍后重试';
 }
